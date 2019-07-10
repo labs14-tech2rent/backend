@@ -1,5 +1,7 @@
 // Update with your config settings.
 
+const dbConnection = process.env.DATABASE_URL;
+
 module.exports = {
   development: {
     client: "sqlite3",
@@ -38,12 +40,11 @@ module.exports = {
 
   production: {
     client: "pg",
-    connection: 
-      "postgres://dpbwkbscotagxs:6ebf4540543086da6be50f26084afcb659c677cc74ae6aafe169093c53a6e48f@ec2-54-235-92-43.compute-1.amazonaws.com:5432/d65snepl202ioo"
-    ,
+    connection:
+      "postgres://dpbwkbscotagxs:6ebf4540543086da6be50f26084afcb659c677cc74ae6aafe169093c53a6e48f@ec2-54-235-92-43.compute-1.amazonaws.com:5432/d65snepl202ioo",
     migrations: {
       directory: "./data/migrations"
-    }, 
+    },
     seeds: {
       directory: "./data/seeds"
     }

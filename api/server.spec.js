@@ -15,7 +15,18 @@ describe("server", () => {
     it("responds with 200 OK and a list of numbers", () => {
       return supertest(server)
         .get("/test")
-        .expect(200);
+        .expect([
+          "one",
+          "two",
+          "three",
+          "four",
+          "five",
+          "six",
+          "seven",
+          "eight",
+          "nine",
+          "ten"
+        ]);
     });
   });
 });

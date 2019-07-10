@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend for Tech2Rent",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/labs14-tech2rent/backend.git"
+  },
+  "author": "Doug B, Lidiia G",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/labs14-tech2rent/backend/issues"
+  },
+  "homepage": "https://github.com/labs14-tech2rent/backend#readme"
+}

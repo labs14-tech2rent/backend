@@ -4,8 +4,8 @@
   "description": "Backend for Tech2Rent",
   "main": "index.js",
   "scripts": {
-      "test": "jest --watch --verbose",
-      "server": "nodemon index.js",
+    "test": "jest --watch --verbose",
+    "server": "nodemon index.js",
     "start": "node index.js"
   },
   "repository": {
@@ -22,6 +22,7 @@
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "faker": "^4.1.0",
     "helmet": "^3.18.0",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.18.3",

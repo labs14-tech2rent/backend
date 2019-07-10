@@ -1,14 +1,22 @@
+const faker = require("faker");
+let users = [];
+function generateUsers() {
+  for (let id = 1; id <= 500; id++) {
+    let firstName = faker.name.firstName();
+    users.push({
+      id: id,
+      username: firstName + Math.floor(Math.random() * 999) + 100
+    });
+  }
+}
+generateUsers();
 
 exports.seed = function(knex) {
   // Deletes ALL existing entries
-  return knex('users')
+  return knex("users")
     .truncate()
-    .then(function () {
+    .then(function() {
       // Inserts seed entries
-      return knex('users').insert([
-        {id: 1, username: 'User1'},
-        {id: 3, username: 'User3'},
-        {id: 2, username: 'User2'},
-      ]);
+      return knex("users").insert(users);
     });
 };

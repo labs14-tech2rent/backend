@@ -4,7 +4,8 @@
   "description": "Backend for Tech2Rent",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+      "test": "jest --watch --verbose",
+      "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,21 @@
   "bugs": {
     "url": "https://github.com/labs14-tech2rent/backend/issues"
   },
-  "homepage": "https://github.com/labs14-tech2rent/backend#readme"
+  "homepage": "https://github.com/labs14-tech2rent/backend#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^3.18.0",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.18.3",
+    "sqlite3": "^4.0.9"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "jest": "^24.8.0",
+    "knex-cleaner": "^1.1.4",
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2"
+  }
 }

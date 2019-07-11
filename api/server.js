@@ -1,6 +1,7 @@
 const express = require("express");
 const db = require("../data/dbConfig");
 
+
 const server = express();
 
 const helmet = require("helmet");
@@ -14,10 +15,12 @@ server.get("/", (req, res) => {
   res.status(200).json({ api: "up" });
 });
 
-server.get("/users", async (req, res) => {
-  const testUsers = await db("users");
-  res.status(200).json(testUsers);
-});
+
+//Routes
+const userRoutes = require('../routes/users/usersRouter');
+
+server.use('/api/users', userRoutes);
+
 
 server.get("/test", (req, res) => {
   let testData = [

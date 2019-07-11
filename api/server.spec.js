@@ -29,27 +29,6 @@ describe("server", () => {
         ]);
     });
 
-    describe('get test users from the users table', () => {
-      it('responds with 200 and shows a list of users', () => {
-        return supertest(server)
-          .get('/users')
-          .expect(
-            [
-              {
-              "id": 1,
-              "username": "User1"
-              },
-              {
-              "id": 2,
-              "username": "User2"
-              },
-              {
-              "id": 3,
-              "username": "User3"
-              }
-              ]
-          )
-      })
-    })
+
   });
 });

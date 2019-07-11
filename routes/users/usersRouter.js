@@ -3,9 +3,9 @@ const router = require('express').Router();
 const knex = require('knex');
 const db = require('../../data/dbConfig');
 const usersModel = require('./usersModel'); 
+const restricted = require('../auth/authMiddleware');
 
-
-router.get("/",  async (req, res) => {
+router.get("/", restricted, async (req, res) => {
     try {
     const testUsers = await usersModel.getAll();
     res.status(200).json(testUsers);

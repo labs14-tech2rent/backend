@@ -1,3 +1,5 @@
+const bcrypt = require('bcryptjs');
+
 const faker = require("faker");
 let users = [];
 function generateUsers() {
@@ -5,7 +7,8 @@ function generateUsers() {
     let firstName = faker.name.firstName();
     users.push({
       id: id,
-      username: firstName + Math.floor(Math.random() * 999) + 100
+      username: firstName + Math.floor(Math.random() * 999) + 100,
+      password: bcrypt.hashSync('password', 8)
     });
   }
 }

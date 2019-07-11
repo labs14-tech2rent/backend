@@ -17,9 +17,14 @@ server.get("/", (req, res) => {
 
 
 //Routes
-const userRoutes = require('../routes/users/usersRouter');
 
+//User
+const userRoutes = require('../routes/users/usersRouter');
 server.use('/api/users', userRoutes);
+
+//Auth
+const authRoutes = require('../routes/auth/authRouter');
+server.use('/api/auth', authRoutes);
 
 
 server.get("/test", (req, res) => {

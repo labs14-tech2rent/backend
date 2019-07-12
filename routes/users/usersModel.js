@@ -18,7 +18,7 @@ function addUser(newUser) {
 
     return db('users').insert(newUser, 'id')
         .then(res => {
-            getUserById(res)
+            return getUserById(res)
         });
     
 }

@@ -14,10 +14,13 @@ function getAll() {
     return db('users');
 }
 
-async function addUser(newUser) {
+function addUser(newUser) {
 
-    const [id] = db('users').insert(newUser);
-    return await getUserById(id); 
+    return db('users').insert(newUser, 'id')
+        .then(res => {
+            getUserById(res)
+        });
+    
 }
 
 function getUserById(id) {

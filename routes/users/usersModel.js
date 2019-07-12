@@ -17,7 +17,7 @@ function getAll() {
 async function addUser(newUser) {
 
     const [id] = await db('users').insert(newUser);
-    return getUserById(id); 
+    return await getUserById(id); 
 }
 
 function getUserById(id) {

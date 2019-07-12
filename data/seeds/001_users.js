@@ -6,7 +6,6 @@ function generateUsers() {
   for (let id = 1; id <= 500; id++) {
     let firstName = faker.name.firstName();
     users.push({
-      id: id,
       username: firstName + Math.floor(Math.random() * 999) + 100,
       password: bcrypt.hashSync('password', 8)
     });

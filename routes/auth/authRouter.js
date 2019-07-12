@@ -10,7 +10,9 @@ router.post('/register', (req, res) => {
     user.password = hash
     
     usersModel.addUser(user)
+
     .then( saved => {
+        console.log('saved', saved)
         res.status(201).json(saved);
     })
     .catch(error => {

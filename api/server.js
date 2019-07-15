@@ -1,5 +1,6 @@
 const express = require("express");
 const db = require("../data/dbConfig");
+const passportSetup = require('../config/passport-setup');
 
 
 const server = express();
@@ -28,6 +29,7 @@ server.use('/api/auth', authRoutes);
 
 
 server.get("/test", (req, res) => {
+  
   let testData = [
     "one",
     "two",

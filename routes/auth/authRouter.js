@@ -3,6 +3,13 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const usersModel = require('../users/usersModel');
 const secret = require('../../config/secret');
+const passport = require('passport');
+
+//Auth with google
+
+router.get('/google', passport.authenticate('google', {
+    scope: ["profile"]
+}));
 
 router.post('/register', (req, res) => {
     let user = req.body;

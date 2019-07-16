@@ -19,17 +19,19 @@ passport.use(
         clientSecret: process.env.CLIENT_SECRET
     },
     async (accessToken, refreshToken, profile, done) => {
+
+        console.log('profile', profile);
    
         const allUsers = await usersModel.getAll();
         let currentUser;
 
         const newUser = {
-            username: profile.displayName,
+            username: profile._json.email,
             password: profile.id
         }
 
         allUsers.forEach(async user => {
-            if(user.username === profile.displayName) {
+            if(user.username === profile._json.email) {
                 currentUser = await usersModel.getUserById(user.id);
                 console.log('curentuser', currentUser);
                 done(null, currentUser)  

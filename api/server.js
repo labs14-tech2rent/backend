@@ -34,7 +34,7 @@ server.get("/test", passport.authenticate('google'), async (req, res) => {
   ];
   res.status(200).json(testData);
 
-  console.log(res.req.user);
+  console.log('user from /test', res.req.user);
 });
 
 //Routes

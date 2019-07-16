@@ -1,5 +1,6 @@
 const express = require("express");
 const db = require("../data/dbConfig");
+const passport = require('passport');
 const passportSetup = require('../config/passport-setup');
 
 
@@ -11,24 +12,13 @@ const cors = require("cors");
 server.use(helmet());
 server.use(express.json());
 server.use(cors());
+server.use(passport.initialize());
 
 server.get("/", (req, res) => {
   res.status(200).json({ api: "up" });
 });
 
-
-//Routes
-
-//User
-const userRoutes = require('../routes/users/usersRouter');
-server.use('/api/users', userRoutes);
-
-//Auth
-const authRoutes = require('../routes/auth/authRouter');
-server.use('/api/auth', authRoutes);
-
-
-server.get("/test", (req, res) => {
+server.get("/test", passport.authenticate('google'), async (req, res) => {
   
   let testData = [
     "one",
@@ -43,6 +33,21 @@ server.get("/test", (req, res) => {
     "ten"
   ];
   res.status(200).json(testData);
+
+  const user = await res.user;
+  console.log(user);
 });
+
+//Routes
+
+//User
+const userRoutes = require('../routes/users/usersRouter');
+server.use('/api/users', userRoutes);
+
+//Auth
+const authRoutes = require('../routes/auth/authRouter');
+server.use('/api/auth', authRoutes);
+
+
 
 module.exports = server;

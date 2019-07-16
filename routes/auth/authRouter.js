@@ -8,7 +8,7 @@ const passport = require('passport');
 //Auth with google
 
 router.get('/google', passport.authenticate('google', {
-    scope: ["profile"]
+    scope: ["profile", "email"]
 }));
 
 router.post('/register', (req, res) => {

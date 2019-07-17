@@ -1,7 +1,6 @@
 const express = require("express");
 const db = require("../data/dbConfig");
-const passportSetup = require('../config/passport-setup');
-
+//const passportSetup = require('../config/passport-setup');
 
 const server = express();
 
@@ -16,20 +15,17 @@ server.get("/", (req, res) => {
   res.status(200).json({ api: "up" });
 });
 
-
 //Routes
 
 //User
-const userRoutes = require('../routes/users/usersRouter');
-server.use('/api/users', userRoutes);
+const userRoutes = require("../routes/users/usersRouter");
+server.use("/api/users", userRoutes);
 
 //Auth
-const authRoutes = require('../routes/auth/authRouter');
-server.use('/api/auth', authRoutes);
-
+const authRoutes = require("../routes/auth/authRouter");
+server.use("/api/auth", authRoutes);
 
 server.get("/test", (req, res) => {
-  
   let testData = [
     "one",
     "two",

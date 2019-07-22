@@ -1,13 +1,14 @@
 const bcrypt = require('bcryptjs');
 
-const faker = require("faker");
-let users = [];
+const faker = require('faker');
+
+const users = [];
 function generateUsers() {
   for (let id = 1; id <= 500; id++) {
-    let firstName = faker.name.firstName();
+    const firstName = faker.name.firstName();
     users.push({
       username: firstName + Math.floor(Math.random() * 999) + 100,
-      password: bcrypt.hashSync('password', 8)
+      password: bcrypt.hashSync('password', 8),
     });
   }
 }
@@ -15,10 +16,10 @@ generateUsers();
 
 exports.seed = function(knex) {
   // Deletes ALL existing entries
-  return knex("users")
+  return knex('users')
     .truncate()
     .then(function() {
       // Inserts seed entries
-      return knex("users").insert(users);
+      return knex('users').insert(users);
     });
 };

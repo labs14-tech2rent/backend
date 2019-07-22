@@ -1,44 +1,66 @@
 const express = require("express");
 const db = require("../data/dbConfig");
-
 const server = express();
-
-const helmet = require("helmet");
+const lc = require('localStorage');
+const helmet = require("helmet"); 
 const cors = require("cors");
-
+const dotenv = require("dotenv");
 const jwt = require("express-jwt");
 const jwtAuthz = require("express-jwt-authz");
 const jwksRsa = require("jwks-rsa");
-
 const Auth0Strategy = require("passport-auth0");
 const passport = require("passport");
 const session = require("express-session");
 const ensureLoggedIn = require("connect-ensure-login").ensureLoggedIn();
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+
+dotenv.config();
 
 const strategy = new Auth0Strategy(
   {
-    domain: "dev-gco3gwsp.auth0.com",
-    clientID: "nQaekaDksMqSatuhNoVbjBYNItSAGTiO",
-    clientSecret:
-      "EeID-Z3gpRKOkSWRDU311AqIaIzWHzdCYaAXU4-XUOwHqSTm75f2vkUEUHcUwCYm",
-    callbackURL: "/callback"
+    domain: process.env.AUTH0_DOMAIN,
+    clientID: process.env.AUTH0_CLIENT_ID,
+    clientSecret: process.env.AUTH0_CLIENT_SECRET,
+    callbackURL:
+      process.env.AUTH0_CALLBACK_URL || "http://localhost:5000/callback"
   },
   function(accessToken, refreshToken, extraParams, profile, done) {
+    if (typeof localStorage === "undefined" || localStorage === null) {
+      var LocalStorage = require('node-localstorage').LocalStorage;
+      localStorage = new LocalStorage('./scratch');
+    }
+     
+    //localStorage.setItem('myFirstKey', 'myFirstValue');
+    localStorage.setItem('jwt', extraParams.id_token);
     return done(null, profile);
   }
 );
+
+const env = {
+  AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,
+  AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
+  AUTH0_CALLBACK_URL:
+    process.env.AUTH0_CALLBACK_URL || "http://localhost:5000/callback"
+};
+
 passport.use(strategy);
 
 // middleware that serializes the user into the session
 passport.serializeUser((user, done) => {
+  
   done(null, user);
 });
 
 // middleware that deserializes user's info
 passport.deserializeUser((user, done) => {
+  console.log(user);
   done(null, user);
 });
 
+server.use(bodyParser.json());
+server.use(bodyParser.urlencoded({ extended: false }));
+server.use(cookieParser());
 server.use(helmet());
 server.use(express.json());
 server.use(cors());
@@ -52,6 +74,7 @@ server.get("/", (req, res) => {
   res.status(200).json({ api: "up" });
 });
 
+/*
 const checkJwt = jwt({
   secret: jwksRsa.expressJwtSecret({
     cache: true,
@@ -64,6 +87,7 @@ const checkJwt = jwt({
   issuer: `https://dev-gco3gwsp.auth0.com/`,
   algorithms: ["RS256"]
 });
+*/
 
 //Routes
 
@@ -75,7 +99,7 @@ server.use("/api/users", userRoutes);
 const authRoutes = require("../routes/auth/authRouter");
 server.use("/api/auth", authRoutes);
 
-server.get("/test", ensureLoggedIn, (req, res) => {
+server.get("/test", (req, res) => {
   let testData = [
     "one",
     "two",
@@ -102,13 +126,9 @@ server.get(
   }
 );
 
-server.get(
-  "/login",
-  passport.authenticate("auth0", { scope: "openid profile" }),
-  function(req, res) {
-    res.redirect("/");
-  }
-);
+server.get("/login", passport.authenticate("auth0", {}),function(req, res) {
+  res.redirect("/");
+});
 
 server.get(
   "/login/google",
@@ -117,5 +137,11 @@ server.get(
     res.redirect("/");
   }
 );
+
+server.get("/logout", (req, res) => {
+  // For the logout page, we don't need to render a page, we just want the user to be logged out when they hit this page. We'll use the ExpressJS built in logout method, and then we'll redirect the user back to the homepage.
+  req.logout();
+  res.redirect("/");
+});
 
 module.exports = server;

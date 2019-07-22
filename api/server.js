@@ -26,6 +26,8 @@ const strategy = new Auth0Strategy(
       process.env.AUTH0_CALLBACK_URL || "http://localhost:5000/callback"
   },
   function(accessToken, refreshToken, extraParams, profile, done) {
+  
+    /*
     if (typeof localStorage === "undefined" || localStorage === null) {
       var LocalStorage = require('node-localstorage').LocalStorage;
       localStorage = new LocalStorage('./scratch');
@@ -33,7 +35,8 @@ const strategy = new Auth0Strategy(
      
     //localStorage.setItem('myFirstKey', 'myFirstValue');
     localStorage.setItem('jwt', extraParams.id_token);
-    return done(null, profile);
+    */
+    return done(null, {profile: profile, token: extraParams.id_token});
   }
 );
 
@@ -54,7 +57,7 @@ passport.serializeUser((user, done) => {
 
 // middleware that deserializes user's info
 passport.deserializeUser((user, done) => {
-  console.log(user);
+  //console.log(user);
   done(null, user);
 });
 
@@ -71,7 +74,10 @@ server.use(passport.initialize());
 server.use(passport.session());
 
 server.get("/", (req, res) => {
-  res.status(200).json({ api: "up" });
+  const token = res.req.user.profile.displayName;
+  console.log(res.req.user, 'BBBBBBBBBBBBBBBBBBBBBBBBBBBB');
+  res.status(200).json({ api: "up", profile: token});
+  return res.user
 });
 
 /*

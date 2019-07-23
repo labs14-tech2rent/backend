@@ -32,7 +32,7 @@ router.post('/:id/items', async(req, res) => {
         if(newItem.name && newItem.description) {
             const addItem = await db('items').insert({...newItem, users_ownerId: id});
             if(addItem) {
-                res.status(200).json(addItem);
+                res.status(201).json(addItem);
             } else {
                 res.status(401).json({message: "The item with provided id was not found"});
             }

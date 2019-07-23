@@ -30,7 +30,10 @@ router.post('/:id/items', async(req, res) => {
         const newItem = req.body;
         const id = req.params.id;
         if(newItem.name && newItem.description) {
-            const addItem = await db('items').insert({...newItem, users_ownerId: id});
+            const addItem = await db('items')
+                .returning('id')
+                .insert({...newItem, users_ownerId: id});
+            console.log(addItem);
             if(addItem) {
                 res.status(201).json(addItem);
             } else {

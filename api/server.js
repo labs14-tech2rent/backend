@@ -1,8 +1,8 @@
 const express = require("express");
 const db = require("../data/dbConfig");
 const server = express();
-const lc = require('localStorage');
-const helmet = require("helmet"); 
+const lc = require("localStorage");
+const helmet = require("helmet");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const jwt = require("express-jwt");
@@ -26,7 +26,6 @@ const strategy = new Auth0Strategy(
       process.env.AUTH0_CALLBACK_URL || "http://localhost:5000/callback"
   },
   function(accessToken, refreshToken, extraParams, profile, done) {
-  
     /*
     if (typeof localStorage === "undefined" || localStorage === null) {
       var LocalStorage = require('node-localstorage').LocalStorage;
@@ -36,7 +35,7 @@ const strategy = new Auth0Strategy(
     //localStorage.setItem('myFirstKey', 'myFirstValue');
     localStorage.setItem('jwt', extraParams.id_token);
     */
-    return done(null, {profile: profile, token: extraParams.id_token});
+    return done(null, { profile: profile, token: extraParams.id_token });
   }
 );
 
@@ -51,7 +50,6 @@ passport.use(strategy);
 
 // middleware that serializes the user into the session
 passport.serializeUser((user, done) => {
-  
   done(null, user);
 });
 
@@ -74,10 +72,18 @@ server.use(passport.initialize());
 server.use(passport.session());
 
 server.get("/", (req, res) => {
-  const token = res.req.user.profile.displayName;
-  console.log(res.req.user, 'BBBBBBBBBBBBBBBBBBBBBBBBBBBB');
-  res.status(200).json({ api: "up", profile: token});
-  return res.user
+  /*
+    if (res.req.user.profile.displayName == 3) {
+    const token = res.req.user.profile.displayName;
+    console.log(token);
+    console.log(res.req.user, "BBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+    res.status(200).json({ api: "up", profile: token });
+    return res.user;
+  } else {
+    
+  }
+    */
+  res.status(200).json({ api: "up" });
 });
 
 /*
@@ -132,7 +138,7 @@ server.get(
   }
 );
 
-server.get("/login", passport.authenticate("auth0", {}),function(req, res) {
+server.get("/login", passport.authenticate("auth0", {}), function(req, res) {
   res.redirect("/");
 });
 

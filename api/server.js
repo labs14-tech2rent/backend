@@ -43,6 +43,10 @@ server.get("/test", passport.authenticate('google'), async (req, res) => {
 const userRoutes = require('../routes/users/usersRouter');
 server.use('/api/users', userRoutes);
 
+//Items
+const itemsRoutes = require('../routes/items/itemsRouter');
+server.use('/api/items', itemsRoutes);
+
 //Auth
 const authRoutes = require('../routes/auth/authRouter');
 server.use('/api/auth', authRoutes);

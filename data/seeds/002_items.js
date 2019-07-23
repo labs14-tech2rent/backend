@@ -8,7 +8,7 @@ exports.seed = function(knex) {
       return knex('items').insert([
         {
           users_ownerId: 1,
-          name: "Trail Wildlife Camera",
+          name: "APEMAN Trail Camera 16MP 1080P Wildlife Camera, Night Detection Game Camera with No Glow 940nm IR LEDs, Time Lapse, Timer, IP66 Waterproof Design",
           price: 20.00,
           picture: "https://ae01.alicdn.com/kf/HTB1Brc7QFXXXXbFXVXXq6xXFXXXX.jpg",
           location: "Philadelphia, PA",
@@ -21,7 +21,7 @@ exports.seed = function(knex) {
         },
         {
           users_ownerId: 1,
-          name: "Trail Wildlife Camera",
+          name: "APEMAN Trail Camera 16MP 1080P Wildlife Camera, Night Detection Game Camera with No Glow 940nm IR LEDs, Time Lapse, Timer, IP66 Waterproof Design",
           price: 20.00,
           picture: "https://ae01.alicdn.com/kf/HTB1Brc7QFXXXXbFXVXXq6xXFXXXX.jpg",
           location: "Philadelphia, PA",
@@ -35,7 +35,7 @@ exports.seed = function(knex) {
         },
         {
           users_ownerId: 1,
-          name: "Trail Wildlife Camera",
+          name: "APEMAN Trail Camera 16MP 1080P Wildlife Camera, Night Detection Game Camera with No Glow 940nm IR LEDs, Time Lapse, Timer, IP66 Waterproof Design",
           price: 20.00,
           picture: "https://ae01.alicdn.com/kf/HTB1Brc7QFXXXXbFXVXXq6xXFXXXX.jpg",
           location: "Philadelphia, PA",

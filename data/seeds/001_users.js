@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const faker = require("faker");
 let users = [];
 function generateUsers() {
-  for (let id = 1; id <= 500; id++) {
+  for (let id = 1; id <= 499; id++) {
     let firstName = faker.name.firstName();
     users.push({
       username: firstName + Math.floor(Math.random() * 999) + 100,

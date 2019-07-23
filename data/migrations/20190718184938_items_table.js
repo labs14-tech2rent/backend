@@ -26,7 +26,7 @@ exports.up = function(knex) {
             .string('category', 255);
            
         tbl
-            .string('decription', 255);
+            .string('description', 255);
 
         tbl
             .boolean('available', 255);

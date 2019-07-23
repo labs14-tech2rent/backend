@@ -22,7 +22,9 @@ const strategy = new Auth0Strategy(
     domain: process.env.AUTH0_DOMAIN,
     clientID: process.env.AUTH0_CLIENT_ID,
     clientSecret: process.env.AUTH0_CLIENT_SECRET,
-    callbackURL: process.env.AUTH0_CALLBACK_URL
+    callbackURL:
+      process.env.AUTH0_CALLBACK_URL ||
+      "https://labstech2rentstaging.herokuapp.com/callback"
   },
   function(accessToken, refreshToken, extraParams, profile, done) {
     /*
@@ -41,7 +43,9 @@ const strategy = new Auth0Strategy(
 const env = {
   AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,
   AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
-  AUTH0_CALLBACK_URL: process.env.AUTH0_CALLBACK_URL
+  AUTH0_CALLBACK_URL:
+    process.env.AUTH0_CALLBACK_URL ||
+    "https://labstech2rentstaging.herokuapp.com/callback"
 };
 
 passport.use(strategy);

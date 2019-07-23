@@ -1,11 +1,10 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
-<<<<<<< HEAD
+
 const usersModel = require('../routes/users/usersModel');
 require('dotenv').config()
-=======
-require('dotenv').config();
->>>>>>> master
+
+
 
 passport.serializeUser((user, done) => {
     done(null, user.id)
@@ -23,7 +22,6 @@ passport.use(
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
     },
-<<<<<<< HEAD
     async (accessToken, refreshToken, profile, done) => {
 
         console.log('profile', profile);
@@ -54,8 +52,3 @@ passport.use(
         
     })
 )
-=======
-    () => {}
-  )
-);
->>>>>>> master

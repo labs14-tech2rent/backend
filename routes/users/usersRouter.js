@@ -6,6 +6,7 @@ const restricted = require('../auth/authMiddleware');
 
 router.get('/', restricted, async (req, res) => {
   try {
+
     const testUsers = await usersModel.getAll();
     res.status(200).json(testUsers);
   } catch (error) {
@@ -13,16 +14,14 @@ router.get('/', restricted, async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
-//Unprotected routers 
 
 router.get("/unprotected", async (req, res) => {
     try {
     const testUsers = await usersModel.getAll();
     res.status(200).json(testUsers);
-    } catch (error) {
-        res.status(500).json(error);
-    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
 });
 
 router.post('/:id/items', async(req, res) => {
@@ -47,6 +46,4 @@ router.post('/:id/items', async(req, res) => {
   });
 
 module.exports = router;
-=======
-module.exports = router;
->>>>>>> master
+

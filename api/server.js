@@ -24,8 +24,11 @@ server.get('/', (req, res) => {
 
 // User
 const userRoutes = require('../routes/users/usersRouter');
-
 server.use('/api/users', userRoutes);
+
+//Items
+const itemsRoutes = require('../routes/items/itemsRouter');
+server.use('/api/items', itemsRoutes);
 
 // Auth
 const authRoutes = require('../routes/auth/authRouter');
@@ -50,21 +53,6 @@ server.get('/test', (req, res) => {
 
   console.log('user from /test', res.req.user);
 });
-
-//Routes
-
-//User
-const userRoutes = require('../routes/users/usersRouter');
-server.use('/api/users', userRoutes);
-
-//Items
-const itemsRoutes = require('../routes/items/itemsRouter');
-server.use('/api/items', itemsRoutes);
-
-//Auth
-const authRoutes = require('../routes/auth/authRouter');
-server.use('/api/auth', authRoutes);
-
 
 
 module.exports = server;

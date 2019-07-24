@@ -1,7 +1,7 @@
 const express = require("express");
 const dataBase = require("../data/dbConfig");
-const passport = require('passport');
-const passportSetup = require('../config/passport-setup');
+//const passport = require('passport');
+//const passportSetup = require('../config/passport-setup');
 
 
 const server = express();

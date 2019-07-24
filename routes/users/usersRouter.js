@@ -13,7 +13,6 @@ router.get('/', restricted, async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
 //Unprotected routers 
 
 router.get("/unprotected", async (req, res) => {
@@ -47,6 +46,3 @@ router.post('/:id/items', async(req, res) => {
   });
 
 module.exports = router;
-=======
-module.exports = router;
->>>>>>> master

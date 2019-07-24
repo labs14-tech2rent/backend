@@ -7,18 +7,9 @@ const secret = require('../../config/secret');
 
 // Auth with google
 
-<<<<<<< HEAD
 router.get('/google', passport.authenticate('google', {
     scope: ["profile", "email"]
 }));
-=======
-router.get(
-  '/google',
-  passport.authenticate('google', {
-    scope: ['profile'],
-  })
-);
->>>>>>> master
 
 router.post('/register', (req, res) => {
   const user = req.body;

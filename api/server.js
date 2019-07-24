@@ -1,5 +1,5 @@
 const express = require("express");
-const db = require("../data/dbConfig");
+const dataBase = require("../data/dbConfig");
 const passport = require('passport');
 const passportSetup = require('../config/passport-setup');
 
@@ -7,7 +7,6 @@ const server = express();
 
 const helmet = require('helmet');
 const cors = require('cors');
-const db = require('../data/dbConfig');
 
 server.use(helmet());
 server.use(express.json());

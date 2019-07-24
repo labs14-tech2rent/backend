@@ -1,7 +1,9 @@
+
 const express = require("express");
 const dataBase = require("../data/dbConfig");
 const passport = require('passport');
 const passportSetup = require('../config/passport-setup');
+
 
 const server = express();
 
@@ -17,19 +19,32 @@ server.get('/', (req, res) => {
   res.status(200).json({ api: 'up' });
 });
 
-server.get("/test", passport.authenticate('google'), async (req, res) => {
-  
-  let testData = [
-    "one",
-    "two",
-    "three",
-    "four",
-    "five",
-    "six",
-    "seven",
-    "eight",
-    "nine",
-    "ten"
+
+// Routes
+
+// User
+const userRoutes = require('../routes/users/usersRouter');
+
+server.use('/api/users', userRoutes);
+
+// Auth
+const authRoutes = require('../routes/auth/authRouter');
+
+server.use('/api/auth', authRoutes);
+
+server.get('/test', (req, res) => {
+  const testData = [
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+    'ten',
+
   ];
   res.status(200).json(testData);
 

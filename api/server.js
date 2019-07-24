@@ -1,4 +1,3 @@
-
 const express = require("express");
 const dataBase = require("../data/dbConfig");
 const passport = require('passport');
@@ -15,14 +14,15 @@ server.use(express.json());
 server.use(cors());
 server.use(passport.initialize());
 
-server.get('/', (req, res) => {
-  res.status(200).json({ api: 'up' });
+server.get("/", (req, res) => {
+  res.status(200).json({ api: "up" });
 });
 
 
 // Routes
 
 // User
+
 const userRoutes = require('../routes/users/usersRouter');
 server.use('/api/users', userRoutes);
 
@@ -31,11 +31,11 @@ const itemsRoutes = require('../routes/items/itemsRouter');
 server.use('/api/items', itemsRoutes);
 
 // Auth
-const authRoutes = require('../routes/auth/authRouter');
+const authRoutes = require("../routes/auth/authRouter");
 
-server.use('/api/auth', authRoutes);
+server.use("/api/auth", authRoutes);
 
-server.get('/test', (req, res) => {
+server.get("/test", (req, res) => {
   const testData = [
     'one',
     'two',
@@ -47,7 +47,6 @@ server.get('/test', (req, res) => {
     'eight',
     'nine',
     'ten',
-
   ];
   res.status(200).json(testData);
 

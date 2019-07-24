@@ -3,6 +3,11 @@ exports.up = function(knex) {
     tbl.increments();
 
     tbl
+      .string('auth0_user_id', 255)
+      .notNullable()
+      .unique();
+
+    tbl
       .string('username', 128)
       .notNullable()
       .unique();

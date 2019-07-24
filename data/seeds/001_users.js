@@ -7,6 +7,7 @@ function generateUsers() {
 
   for (let id = 1; id <= 499; id++) {
     let firstName = faker.name.firstName();
+    let profi
     users.push({
       username: firstName + Math.floor(Math.random() * 999) + 100,
       password: bcrypt.hashSync('password', 8),

@@ -8,9 +8,40 @@ exports.up = function(knex) {
       .unique();
 
     tbl
-      .string('username', 128)
+      .string('email', 255)
+      .notNullable();
+
+    tbl
+      .string('name', 128)
       .notNullable()
-      .unique();
+     
+
+    tbl
+      .string('profile_picture', 255);
+    
+    tbl
+      .string('phone', 255);
+    
+    tbl
+      .string('date_of_birth', 255);
+
+    tbl
+      .string('preferred_payment_type', 255);
+    
+    tbl
+      .string('street', 255);
+    
+    tbl
+      .string('city', 255);
+
+    tbl
+      .string('state', 255);
+    
+    tbl
+      .integer('zip_code', 6);
+    
+    tbl
+      .decimal('average_rating', 8, 2);
   });
 };
 

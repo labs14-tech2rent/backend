@@ -2,7 +2,6 @@
 
 const dbConnection = process.env.DATABASE_URL;
 
-
 module.exports = {
   development: {
     client: 'sqlite3',
@@ -24,13 +23,13 @@ module.exports = {
   },
 
   staging: {
-    client: "pg",
+    client: 'pg',
     connection: dbConnection,
     migrations: {
-      directory: "./data/migrations",
+      directory: './data/migrations1',
     },
     seeds: {
-      directory: "./data/seeds",
+      directory: './data/seeds',
     },
   },
 
@@ -38,7 +37,7 @@ module.exports = {
     client: 'pg',
     connection: dbConnection,
     migrations: {
-      directory: './data/migrations',
+      directory: './data/migrations1',
     },
     seeds: {
       directory: './data/seeds',

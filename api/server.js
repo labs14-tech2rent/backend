@@ -1,5 +1,4 @@
-const express = require("express");
-const dataBase = require("../data/dbConfig");
+const express = require('express');
 const passport = require('passport');
 const passportSetup = require('../config/passport-setup');
 
@@ -8,34 +7,37 @@ const server = express();
 
 const helmet = require('helmet');
 const cors = require('cors');
+const dataBase = require("../data/dbConfig");
 
 server.use(helmet());
-server.use(express.json());
 server.use(cors());
+server.use(express.json());
+
 server.use(passport.initialize());
 
-server.get("/", (req, res) => {
-  res.status(200).json({ api: "up" });
+server.get('/', (req, res) => {
+  res.status(200).json({ api: 'up' });
 });
-
 
 // Routes
 
 // User
 
 const userRoutes = require('../routes/users/usersRouter');
+
 server.use('/api/users', userRoutes);
 
-//Items
+// Items
 const itemsRoutes = require('../routes/items/itemsRouter');
+
 server.use('/api/items', itemsRoutes);
 
 // Auth
-const authRoutes = require("../routes/auth/authRouter");
+const authRoutes = require('../routes/auth/authRouter');
 
-server.use("/api/auth", authRoutes);
+server.use('/api/auth', authRoutes);
 
-server.get("/test", (req, res) => {
+server.get('/test', (req, res) => {
   const testData = [
     'one',
     'two',
@@ -52,6 +54,5 @@ server.get("/test", (req, res) => {
 
   console.log('user from /test', res.req.user);
 });
-
 
 module.exports = server;

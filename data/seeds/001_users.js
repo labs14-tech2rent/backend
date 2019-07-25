@@ -4,22 +4,21 @@ const faker = require('faker');
 
 const users = [];
 function generateUsers() {
-
   for (let id = 1; id <= 10; id++) {
-    let firstName = faker.name.firstName();
-    let profilePicture = faker.image.avatar();
-    let phoneNumber = faker.phone.phoneNumber();
-    let dateOfBirth = faker.date.past();
-    let paymentType = 'Amex Black Card';
-    let addressStreet = faker.address.streetAddress();
-    let addressCity = faker.address.city();
-    let addressState = faker.address.stateAbbr();
-    let addressZipCode = faker.address.zipCode();
-    let averageRating = 5.7;
-    let email = faker.internet.email();
+    const firstName = faker.name.firstName();
+    const profilePicture = faker.image.avatar();
+    const phoneNumber = faker.phone.phoneNumber();
+    const dateOfBirth = faker.date.past();
+    const paymentType = 'Amex Black Card';
+    const addressStreet = faker.address.streetAddress();
+    const addressCity = faker.address.city();
+    const addressState = faker.address.stateAbbr();
+    const addressZipCode = faker.address.zipCode();
+    const averageRating = 5.7;
+    const email = faker.internet.email();
     users.push({
-      auth0_user_id: 'fake |' + Math.floor(Math.random() * 999) + 100,
-      email: email,
+      auth0_user_id: `fake |${  Math.floor(Math.random() * 999)  }${100}`,
+      email,
       name: firstName + Math.floor(Math.random() * 999) + 100,
       profile_picture: profilePicture,
       phone: phoneNumber,
@@ -28,7 +27,7 @@ function generateUsers() {
       street: addressStreet,
       city: addressCity,
       state: addressState,
-      zip_code: addressZipCode,
+      zip_code: 11111,
       average_rating: averageRating,
       password: bcrypt.hashSync('password', 8),
     });
@@ -39,9 +38,9 @@ generateUsers();
 exports.seed = function(knex) {
   // Deletes ALL existing entries
 
-  return knex("users")
+  return knex('users')
     .then(function() {
-      // Inserts seed entries
-      return knex('users').insert(users);
-    });
+    // Inserts seed entries
+    return knex('users').insert(users);
+  });
 };

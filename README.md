@@ -38,6 +38,9 @@ To get the server running locally:
 
 | Method | Endpoint                | Access Control      | Description                                        |
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
+| GET    | `/api/users/`           | all users           | Returns a list of all users.                       |
+| GET    | `/api/users/unprotected`| all users no auth   | Returns a list of all users.                       |
+| GET    | `/api/users/:id/reviews`| user with reviews   | Returns a user with  reviews.                      |
 | GET    | `/api/users/userIDs`    | all users Ids       | Returns a list of all user IDs.                    |
 | POST   | `/api/users/:id/items`  | add new item        | Adds a new item for a user.                        |
 | POST   | `/api/auth/register`    | add new user        | Registration of profile of a new user.             |
@@ -88,6 +91,22 @@ To get the server running locally:
     "average_rating": 5.7,
 
   }
+```
+
+
+#### USERS_REVIEWS
+
+---
+
+```
+      {
+        user_id: 1,
+        reviewer_id: 2,
+        rating: 4.5,
+        review_title: "Great Job",
+        review_body: "Love this user so much! Excellent work and great service. Always rent things from him"
+
+      }
 ```
 
 ## 2️⃣ Actions

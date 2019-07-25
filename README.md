@@ -2,18 +2,16 @@
 
 # API Documentation
 
-#### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
+#### 1️⃣ Backend delpoyed at [Heroku](https://labstech2rent.herokuapp.com/), STAGING URL: [Heroku Staging](https://labstech2rentstaging.herokuapp.com) <br>
 
 ## 1️⃣ Getting started
 
 To get the server running locally:
 
-🚫 adjust these scripts to match your project
-
 - Clone this repo
-- **yarn install** to install all required dependencies
-- **yarn server** to start the local server
-- **yarn test** to start server using testing environment
+- **npm install** to install all required dependencies
+- **npm run server** to start the local server
+- **npm run test** to start server using testing environment
 
 ### Backend framework goes here
 
@@ -28,42 +26,45 @@ To get the server running locally:
 
 🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
 
-#### Organization Routes
+#### Items Routes
 
 | Method | Endpoint                | Access Control | Description                                  |
 | ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/organizations/:orgId` | all users      | Returns the information for an organization. |
-| PUT    | `/organizatoins/:orgId` | owners         | Modify an existing organization.             |
-| DELETE | `/organizations/:orgId` | owners         | Delete an organization.                      |
+| GET    | `/api/items`            | all items      | Returns the list of all items in the db.     |
+| PUT    | ` `                     |                | Modify an existing item.                     |
+| DELETE | ` `                     |                | Delete an item.                              |
 
 #### User Routes
 
 | Method | Endpoint                | Access Control      | Description                                        |
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| GET    | `/users/current`        | all users           | Returns info for the logged in user.               |
-| GET    | `/users/org/:userId`    | owners, supervisors | Returns all users for an organization.             |
-| GET    | `/users/:userId`        | owners, supervisors | Returns info for a single user.                    |
-| POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization. |
-| PUT    | `/users/:userId`        | owners, supervisors |                                                    |
-| DELETE | `/users/:userId`        | owners, supervisors |                                                    |
+| GET    | `/api/users/userIDs`    | all users Ids       | Returns a list of all user IDs.                    |
+| POST   | `/api/users/:id/items`  | add new item        | Adds a new item for a user.                        |
+| POST   | `/api/auth/register`    | add new user        | Registration of profile of a new user.             |
+
 
 # Data Model
 
 🚫This is just an example. Replace this with your data model
 
-#### 2️⃣ ORGANIZATIONS
+#### ITEMS
 
 ---
 
 ```
-{
-  id: UUID
-  name: STRING
-  industry: STRING
-  paid: BOOLEAN
-  customer_id: STRING
-  subscription_id: STRING
-}
+  {
+    "id": 1,
+    "users_ownerId": 1,
+    "name": "APEMAN Trail Camera 16MP 1080P Wildlife Camera, Night Detection Game Camera with No Glow 940nm IR LEDs, Time Lapse, Timer, IP66 Waterproof Design", <--REQUIRED
+    "price": 20, <--REQUIRED
+    "picture": "https://ae01.alicdn.com/kf/HTB1Brc7QFXXXXbFXVXXq6xXFXXXX.jpg",
+    "location": "Philadelphia, PA",
+    "category": "Cameras",
+    "description": "Trail cameras are fit for hunters and wildlife enthusiasts alike. These motion-activated cameras capture images day or night, whenever an animal passes into the field of view.",
+    "available": 1,
+    "payment_type": "Online",
+    "avarage_raiting": 4.5
+  }
 ```
 
 #### USERS
@@ -71,46 +72,49 @@ To get the server running locally:
 ---
 
 ```
-{
-  id: UUID
-  organization_id: UUID foreign key in ORGANIZATIONS table
-  first_name: STRING
-  last_name: STRING
-  role: STRING [ 'owner', 'supervisor', 'employee' ]
-  email: STRING
-  phone: STRING
-  cal_visit: BOOLEAN
-  emp_visit: BOOLEAN
-  emailpref: BOOLEAN
-  phonepref: BOOLEAN
-}
+  {
+    "id": 1,
+    REQUIRED "auth0_user_id": "fake |348100",
+    REQUIRED "email": "Gerhard_Schaden@hotmail.com",
+    REQUIRED "name": "Lionel603100",
+    "profile_picture": "https://s3.amazonaws.com/uifaces/faces/twitter/giuliusa/128.jpg",
+    "phone": "1-178-323-9534 x11315",
+    "date_of_birth": "1561860083989.0",
+    "preferred_payment_type": "Amex Black Card",
+    "street": "90239 Cruickshank Route",
+    "city": "Madisonhaven",
+    "state": "IA",
+    "zip_code": 62903,
+    "average_rating": 5.7,
+
+  }
 ```
 
 ## 2️⃣ Actions
 
 🚫 This is an example, replace this with the actions that pertain to your backend
 
-`getOrgs()` -> Returns all organizations
+### Items
 
-`getOrg(orgId)` -> Returns a single organization by ID
+`getAll()` -> Returns all items
 
-`addOrg(org)` -> Returns the created org
+`getItemById(itemId)` -> Returns a single item by ID
 
-`updateOrg(orgId)` -> Update an organization by ID
-
-`deleteOrg(orgId)` -> Delete an organization by ID
 <br>
 <br>
 <br>
-`getUsers(orgId)` -> if no param all users
 
-`getUser(userId)` -> Returns a single user by user ID
+### Users
 
-`addUser(user object)` --> Creates a new user and returns that user. Also creates 7 availabilities defaulted to hours of operation for their organization.
+`getAll()` -> if no param all users
 
-`updateUser(userId, changes object)` -> Updates a single user by ID.
+`getAllByIds()` -> Returns all users by user ID
 
-`deleteUser(userId)` -> deletes everything dependent on the user
+`addUser(user object)` --> Creates a new user and returns that user.
+
+`getUserById(id)` -> Returns one user by ID (not Auth0 id)
+
+`getUserByUsername(filter)` -> Filters username
 
 ## 3️⃣ Environment Variables
 
@@ -118,8 +122,6 @@ In order for the app to function correctly, the user must set up their own envir
 
 create a .env file that includes the following:
 
-🚫 These are just examples, replace them with the specifics for your app
-    
     *  STAGING_DB - optional development db for using functionality not available in SQLite
     *  NODE_ENV - set to "development" until ready for "production"
     *  JWT_SECRET - you can generate this by using a python shell and running import random''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&amp;*(-*=+)') for i in range(50)])

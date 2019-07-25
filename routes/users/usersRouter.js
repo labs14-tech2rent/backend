@@ -14,6 +14,15 @@ router.get('/', restricted, async (req, res) => {
   }
 });
 
+router.get('/userIDs', async (req, res) => {
+  try {
+    const userIDs = await usersModel.getAllByIds();
+    res.status(200).json(userIDs);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+})
+
 //Unprotected routers 
 
 router.get("/unprotected", async (req, res) => {

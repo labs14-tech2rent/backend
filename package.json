@@ -25,6 +25,7 @@
     "express": "^4.17.1",
     "faker": "^4.1.0",
     "helmet": "^3.18.0",
+    "heroku-cli": "^7.0.9",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.18.3",
     "passport": "^0.4.0",

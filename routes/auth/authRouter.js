@@ -7,14 +7,17 @@ const secret = require('../../config/secret');
 
 // Auth with google
 
-router.get('/google', passport.authenticate('google', {
-    scope: ["profile", "email"]
-}));
+router.get(
+  '/google',
+  passport.authenticate('google', {
+    scope: ['profile', 'email']
+  })
+);
 
 router.post('/register', (req, res) => {
   const user = req.body;
-  const hash = bcrypt.hashSync(user.password, 8);
-  user.password = hash;
+  // const hash = bcrypt.hashSync(user.password, 8);
+  // user.password = hash;
 
   usersModel
     .addUser(user)

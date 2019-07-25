@@ -5,5 +5,5 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropColumn('password');
+  return knex.schema.dropTableIfExists('password');
 };

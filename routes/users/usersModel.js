@@ -3,15 +3,18 @@ const db = require('../../data/dbConfig');
 
 module.exports = {
   getAll,
+  getAllByIds,
   getUserById,
   addUser,
-  // updateUser,
-  // deleteUser,
   getUserByUsername,
 };
 
 function getAll() {
   return db('users');
+}
+
+function getAllByIds() {
+  return db('users').select('auth0_user_id'); 
 }
 
 function addUser(newUser) {

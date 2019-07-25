@@ -38,7 +38,7 @@ To get the server running locally:
 
 | Method | Endpoint                | Access Control      | Description                                        |
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| GET    | `/api/users/userIDS`    | all users Ids       | Returns a list of all user IDs.                    |
+| GET    | `/api/users/userIDs`    | all users Ids       | Returns a list of all user IDs.                    |
 | POST   | `/api/users/:id/items`  | add new item        | Adds a new item for a user.                        |
 | POST   | `/api/auth/register`    | add new user        | Registration of profile of a new user.             |
 

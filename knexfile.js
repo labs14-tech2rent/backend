@@ -26,7 +26,7 @@ module.exports = {
     client: 'pg',
     connection: dbConnection,
     migrations: {
-      directory: './data/migrations1',
+      directory: './data/migrations',
     },
     seeds: {
       directory: './data/seeds',
@@ -37,7 +37,7 @@ module.exports = {
     client: 'pg',
     connection: dbConnection,
     migrations: {
-      directory: './data/migrations1',
+      directory: './data/migrations',
     },
     seeds: {
       directory: './data/seeds',

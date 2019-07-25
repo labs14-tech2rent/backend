@@ -25,6 +25,7 @@ router.get('/userIDs', async (req, res) => {
 
 //Unprotected routers 
 
+//GET ALL USERS
 router.get("/unprotected", async (req, res) => {
     try {
     const testUsers = await usersModel.getAll();
@@ -34,6 +35,8 @@ router.get("/unprotected", async (req, res) => {
   }
 });
 
+
+//ADD NEW ITEM FOR THE USER
 router.post('/:id/items', async(req, res) => {
     try {
         const newItem = req.body;
@@ -54,5 +57,21 @@ router.post('/:id/items', async(req, res) => {
         res.status(500).json({message: "There was an error while trying to add an item in the data base"});
     }
   });
+
+//GET USER BY ID WITH ALL REVIEWS THAT HAVE BEEN SUBMITED ABOUT HIM
+router.get('/:id/reviews', async(req, res) => {
+    try {
+        const id = req.params.id;
+        const user = await usersModel.getUserById(id);
+        const reviews = await db('users_reviews').where({user_id: id})
+        console.log('user', user)
+
+        res.status(200).json({...user, reviews})
+    }
+    catch(err) {
+        console.log(err);
+        res.status(500).json({message: "There was an error while trying to retrieve a user from the data base"});
+    }
+});
 
 module.exports = router;

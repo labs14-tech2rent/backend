@@ -31,7 +31,7 @@ To get the server running locally:
 | Method | Endpoint                | Access Control | Description                                  |
 | ------ | ----------------------- | -------------- | -------------------------------------------- |
 | GET    | `/api/items`            | all items      | Returns the list of all items in the db.     |
-| PUT    | ` `                     |                | Modify an existing item.                     |
+| PUT    | `/api/items/:id `       | edit item      | Modify an existing item.                     |
 | DELETE | ` `                     |                | Delete an item.                              |
 
 #### User Routes
@@ -44,6 +44,7 @@ To get the server running locally:
 | GET    | `/api/users/userIDs`    | all users Ids       | Returns a list of all user IDs.                    |
 | POST   | `/api/users/:id/items`  | add new item        | Adds a new item for a user.                        |
 | POST   | `/api/auth/register`    | add new user        | Registration of profile of a new user.             |
+| PUT    | `/api/users/:id`        | edit user           | Modify an existing user.                           |
 
 
 # Data Model
@@ -56,17 +57,20 @@ To get the server running locally:
 
 ```
   {
-    "id": 1,
-    "users_ownerId": 1,
-    "name": "APEMAN Trail Camera 16MP 1080P Wildlife Camera, Night Detection Game Camera with No Glow 940nm IR LEDs, Time Lapse, Timer, IP66 Waterproof Design", <--REQUIRED
-    "price": 20, <--REQUIRED
-    "picture": "https://ae01.alicdn.com/kf/HTB1Brc7QFXXXXbFXVXXq6xXFXXXX.jpg",
-    "location": "Philadelphia, PA",
-    "category": "Cameras",
-    "description": "Trail cameras are fit for hunters and wildlife enthusiasts alike. These motion-activated cameras capture images day or night, whenever an animal passes into the field of view.",
-    "available": 1,
-    "payment_type": "Online",
-    "avarage_raiting": 4.5
+      users_ownerId: 1,
+      name: "APEMAN Trail Camera 16MP 1080P Wildlife Camera, Night Detection Game Camera with No Glow 940nm IR LEDs, Time Lapse, Timer, IP66 Waterproof Design",
+      price: 20.00,
+      picture: "https://ae01.alicdn.com/kf/HTB1Brc7QFXXXXbFXVXXq6xXFXXXX.jpg",
+      category: "Cameras",
+      sub_category: "Trail Camera",
+      description: "Trail cameras are fit for hunters and wildlife enthusiasts alike. These motion-activated cameras capture images day or night, whenever an animal passes into the field of view.",
+      available: 1,
+      payment_type: "Online",
+      avarage_raiting: 4.5,
+      condition: "Used",
+      city: "Philadelphia", 
+      state: "PA",
+      zipcode: '19099'
   }
 ```
 

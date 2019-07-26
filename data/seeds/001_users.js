@@ -1,4 +1,4 @@
-const bcrypt = require('bcryptjs');
+// const bcrypt = require('bcryptjs');
 
 const faker = require('faker');
 
@@ -17,7 +17,7 @@ function generateUsers() {
     const averageRating = 5.7;
     const email = faker.internet.email();
     users.push({
-      auth0_user_id: `fake |${  Math.floor(Math.random() * 999)  }${100}`,
+      auth0_user_id: `fake |${Math.floor(Math.random() * 999)}${100}`,
       email,
       name: firstName + Math.floor(Math.random() * 999) + 100,
       profile_picture: profilePicture,
@@ -29,7 +29,7 @@ function generateUsers() {
       state: addressState,
       zip_code: 11111,
       average_rating: averageRating,
-      password: bcrypt.hashSync('password', 8),
+      // password: bcrypt.hashSync('password', 8),
     });
   }
 }
@@ -38,8 +38,7 @@ generateUsers();
 exports.seed = function(knex) {
   // Deletes ALL existing entries
 
-  return knex('users')
-    .then(function() {
+  return knex('users').then(function() {
     // Inserts seed entries
     return knex('users').insert(users);
   });

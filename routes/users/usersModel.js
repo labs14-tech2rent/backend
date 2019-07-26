@@ -7,6 +7,7 @@ module.exports = {
   getUserById,
   addUser,
   getUserByUsername,
+  update
 };
 
 function getAll() {
@@ -31,4 +32,14 @@ function getUserById(id) {
 
 function getUserByUsername(filter) {
   return db('users').where(filter);
+}
+
+function update(id, changes) {
+  let id1 = id;
+  return getAll()
+  .where({id})
+  .update(changes, "*")
+  .then(() => {
+    return getUserById(id1);
+  });
 }

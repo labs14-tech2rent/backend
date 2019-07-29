@@ -6,7 +6,6 @@ const restricted = require('../auth/authMiddleware');
 
 router.get('/', restricted, async (req, res) => {
   try {
-
     const testUsers = await usersModel.getAll();
     res.status(200).json(testUsers);
   } catch (error) {
@@ -21,13 +20,13 @@ router.get('/userIDs', async (req, res) => {
   } catch (error) {
     res.status(500).json(error);
   }
-})
+});
 
-//Unprotected routers 
+// Unprotected routers
 
-//GET ALL USERS
-router.get("/unprotected", async (req, res) => {
-    try {
+// GET ALL USERS
+router.get('/unprotected', async (req, res) => {
+  try {
     const testUsers = await usersModel.getAll();
     res.status(200).json(testUsers);
   } catch (error) {
@@ -35,54 +34,75 @@ router.get("/unprotected", async (req, res) => {
   }
 });
 
-
-//ADD NEW ITEM FOR THE USER
-router.post('/:id/items', async(req, res) => {
-    try {
-        const newItem = req.body;
-        const id = req.params.id;
-        if(newItem.name && newItem.description) {
-            const addItem = await db('items')
-                .returning('id')
-                .insert({...newItem, users_ownerId: id});
-            console.log(addItem);
-            if(addItem) {
-                res.status(201).json(addItem);
-            } else {
-                res.status(401).json({message: "The item with provided id was not found"});
-            }
-        }
+// ADD NEW ITEM FOR THE USER
+router.post('/:id/items', async (req, res) => {
+  try {
+    const newItem = req.body;
+    const { id } = req.params;
+    if (newItem.name && newItem.description) {
+      const addItem = await db('items')
+        .returning('id')
+        .insert({ ...newItem, users_ownerId: id });
+      console.log(addItem);
+      if (addItem) {
+        res.status(201).json(addItem);
+      } else {
+        res
+          .status(401)
+          .json({ message: 'The item with provided id was not found' });
+      }
     }
-    catch(err){
-        res.status(500).json({message: "There was an error while trying to add an item in the data base"});
-    }
-  });
-
-//GET USER BY ID WITH ALL REVIEWS THAT HAVE BEEN SUBMITED ABOUT HIM
-router.get('/:id/reviews', async(req, res) => {
-    try {
-        const id = req.params.id;
-        const user = await usersModel.getUserById(id);
-        const reviews = await db('users_reviews').where({user_id: id})
-        console.log('user', user)
-
-        res.status(200).json({...user, reviews})
-    }
-    catch(err) {
-        console.log(err);
-        res.status(500).json({message: "There was an error while trying to retrieve a user from the data base"});
-    }
+  } catch (err) {
+    res.status(500).json({
+      message:
+        'There was an error while trying to add an item in the data base',
+    });
+  }
 });
 
-router.put("/:id", async(req, res) => {
+// GET USER BY ID WITH ALL REVIEWS THAT HAVE BEEN SUBMITED ABOUT HIM
+router.get('/:id/reviews', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await usersModel.getUserById(id);
+    const reviews = await db('users_reviews').where({ user_id: id });
+    console.log('user', user);
+
+    res.status(200).json({ ...user, reviews });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message:
+        'There was an error while trying to retrieve a user from the data base',
+    });
+  }
+});
+
+router.put('/:id', async (req, res) => {
   try {
     const users = await usersModel.update(req.params.id, req.body);
-    res.status(200).json(users)
+    res.status(200).json(users);
   } catch (error) {
-    res.status(500).json({ message: "We ran into an error"});
+    res.status(500).json({ message: 'We ran into an error' });
     console.log(error);
   }
 });
 
+router.get('/findUser', async (req, res) => {
+  try {
+    const users = await usersModel.getUserByUsername(req.body);
+    if (Object.entries(users).length === 0) {
+      res.status(200).json({ message: 'User not found' });
+    } else {
+      res.status(200).json(users);
+      console.log(typeof users);
+      console.log(Object.entries(users));
+      console.log(typeof Object.entries(users));
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'We ran into an error' });
+    console.log(error);
+  }
+});
 
 module.exports = router;

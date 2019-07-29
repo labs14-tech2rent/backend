@@ -91,13 +91,17 @@ router.put('/:id', async (req, res) => {
 router.get('/findUser', async (req, res) => {
   try {
     const users = await usersModel.getUserByUsername(req.body);
-    if (Object.entries(users).length === 0) {
+    if (
+      Object.entries(req.body).length === 0 ||
+      Object.entries(users).length === 0
+    ) {
       res.status(200).json({ message: 'User not found' });
     } else {
       res.status(200).json(users);
       console.log(typeof users);
       console.log(Object.entries(users));
       console.log(typeof Object.entries(users));
+      console.log(req.body);
     }
   } catch (error) {
     res.status(500).json({ message: 'We ran into an error' });

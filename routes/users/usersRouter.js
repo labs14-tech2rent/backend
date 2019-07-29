@@ -14,14 +14,6 @@ router.get('/', restricted, async (req, res) => {
   }
 });
 
-router.get('/userIDs', async (req, res) => {
-  try {
-    const userIDs = await usersModel.getAllByIds();
-    res.status(200).json(userIDs);
-  } catch (error) {
-    res.status(500).json(error);
-  }
-})
 
 //Unprotected routers 
 
@@ -74,6 +66,8 @@ router.get('/:id/reviews', async(req, res) => {
     }
 });
 
+//GET USER BY ID
+
 router.put("/:id", async(req, res) => {
   try {
     const users = await usersModel.update(req.params.id, req.body);
@@ -84,5 +78,14 @@ router.put("/:id", async(req, res) => {
   }
 });
 
+//GET THE LIST OF USER IDS
+router.get('/userIDs', async (req, res) => {
+    try {
+      const userIDs = await usersModel.getAllByIds();
+      res.status(200).json(userIDs);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+})
 
 module.exports = router;

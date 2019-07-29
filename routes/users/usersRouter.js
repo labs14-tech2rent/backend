@@ -90,6 +90,7 @@ router.put('/:id', async (req, res) => {
 
 router.post('/findUser', async (req, res) => {
   try {
+    console.log(req.body);
     const regex = /%7C/gi;
     const string = req.body.auth0_user_id;
     console.log(string, 'bbbbbbb');

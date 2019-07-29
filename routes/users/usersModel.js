@@ -7,7 +7,7 @@ module.exports = {
   getUserById,
   addUser,
   getUserByUsername,
-  update
+  update,
 };
 
 function getAll() {
@@ -15,7 +15,9 @@ function getAll() {
 }
 
 function getAllByIds() {
-  return db('users').select('auth0_user_id'); 
+  return db('users')
+    .select('auth0_user_id')
+    .select('id');
 }
 
 function addUser(newUser) {
@@ -35,11 +37,9 @@ function getUserByUsername(filter) {
 }
 
 function update(id, changes) {
-  let id1 = id;
+  const id1 = id;
   return getAll()
-  .where({id})
-  .update(changes, "*")
-  .then(() => {
-    return getUserById(id1);
-  });
+    .where({ id })
+    .update(changes, '*')
+    .then(() => getUserById(id1));
 }

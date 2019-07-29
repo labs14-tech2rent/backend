@@ -90,7 +90,18 @@ router.put('/:id', async (req, res) => {
 
 router.post('/findUser', async (req, res) => {
   try {
+    const regex = /%7C/gi;
+    const string = req.body.auth0_user_id;
+
+    if (string.match(regex)) {
+      console.log(string.replace('%7C', '|'));
+      console.log(string.match(regex));
+      const a = string.replace('%7C', '|');
+      req.body.auth0_user_id = a;
+      console.log(req.body, 'AAAAAAAA');
+    }
     const users = await usersModel.getUserByUsername(req.body);
+    console.log(req.body);
     if (
       Object.entries(req.body).length === 0 ||
       Object.entries(users).length === 0

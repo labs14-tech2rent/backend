@@ -92,7 +92,7 @@ router.post('/findUser', async (req, res) => {
   try {
     const regex = /%7C/gi;
     const string = req.body.auth0_user_id;
-
+    console.log(string, 'bbbbbbb');
     if (string.match(regex)) {
       console.log(string.replace('%7C', '|'));
       console.log(string.match(regex));

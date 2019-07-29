@@ -25,6 +25,22 @@ router.put('/:id', async(req, res) => {
     }
 })
 
+router.delete('/:id', async(req, res) => {
+    try {
+        const {id} = req.params;
+        const itemCount = await itemsModel.deleteItem(id);
+        if(!itemCount || itemCount < 1){
+            res.status(404).json({message: "Item was not found to be removed"})
+        } else{
+            res.status(200).json(itemCount);
+        }
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({message: "There was an error while trying to delete an item from the data base"});
+    }
+}); 
+
 
 
 

@@ -32,7 +32,7 @@ To get the server running locally:
 | ------ | ----------------------- | -------------- | -------------------------------------------- |
 | GET    | `/api/items`            | all items      | Returns the list of all items in the db.     |
 | PUT    | `/api/items/:id `       | edit item      | Modify an existing item.                     |
-| DELETE | ` `                     |                | Delete an item.                              |
+| DELETE | `/api/items/:id `       | delete item    | Remove item from the db.                     |
 
 #### User Routes
 

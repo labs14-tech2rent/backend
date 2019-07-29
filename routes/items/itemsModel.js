@@ -4,7 +4,8 @@ const db = require('../../data/dbConfig');
 module.exports = {
     getAll,
     getItemById,
-    updateItem
+    updateItem,
+    deleteItem
 }
 
 function getAll() {
@@ -18,4 +19,8 @@ function getItemById(id) {
 async function updateItem(id, updatedItem) {
     const updated = await getItemById(id).update(updatedItem);
     return updated;
+}
+
+function deleteItem(id) {
+    return  db('items').where({id}).delete();
 }

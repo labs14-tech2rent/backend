@@ -45,6 +45,7 @@ To get the server running locally:
 | POST   | `/api/users/:id/items`  | add new item        | Adds a new item for a user.                        |
 | POST   | `/api/auth/register`    | add new user        | Registration of profile of a new user.             |
 | PUT    | `/api/users/:id`        | edit user           | Modify an existing user.                           |
+| POST   | `/api/users/findUser`   | logged in user      | Retrieves user information                         |
 
 
 # Data Model

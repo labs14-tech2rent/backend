@@ -56,6 +56,7 @@ router.post('/:id/items', async (req, res) => {
     res.status(500).json({
       message:
         'There was an error while trying to add an item in the data base',
+      err,
     });
     console.log(err);
   }

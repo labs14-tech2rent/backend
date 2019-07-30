@@ -57,6 +57,7 @@ router.post('/:id/items', async (req, res) => {
       message:
         'There was an error while trying to add an item in the data base',
     });
+    console.log(err);
   }
 });
 

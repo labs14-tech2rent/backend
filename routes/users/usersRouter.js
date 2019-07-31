@@ -71,10 +71,8 @@ router.get('/:id/reviews', async (req, res) => {
   }
 });
 
-
-
-//GET USER BY ID
-router.put("/:id", async(req, res) => {
+// GET USER BY ID
+router.put('/:id', async (req, res) => {
   try {
     const users = await usersModel.update(req.params.id, req.body);
     res.status(200).json(users);
@@ -86,19 +84,19 @@ router.put("/:id", async(req, res) => {
 
 router.post('/findUser', async (req, res) => {
   try {
-    console.log(req.body);
+    console.log(req.body, 'aaaaaaaaaaaaa');
     const regex = /%7C/gi;
     const string = req.body.auth0_user_id;
     console.log(string, 'bbbbbbb');
     if (string.match(regex)) {
-      console.log(string.replace('%7C', '|'));
-      console.log(string.match(regex));
+      console.log(string.replace('%7C', '|'), 'ccccccccccc');
+      console.log(string.match(regex), 'ddddddddddddd');
       const a = string.replace('%7C', '|');
       req.body.auth0_user_id = a;
-      console.log(req.body, 'AAAAAAAA');
+      console.log(req.body, 'eeeeeeeeeee');
     }
     const users = await usersModel.getUserByUsername(req.body);
-    console.log(req.body);
+    console.log(req.body, 'fffffffffffffffff');
     if (
       Object.entries(req.body).length === 0 ||
       Object.entries(users).length === 0
@@ -109,18 +107,18 @@ router.post('/findUser', async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ message: 'We ran into an error' });
-    console.log(error);
+    console.log(error, 'ggggggggggggggg');
   }
 });
 
-//GET THE LIST OF USER IDS
+// GET THE LIST OF USER IDS
 router.get('/userIDs', async (req, res) => {
-    try {
-      const userIDs = await usersModel.getAllByIds();
-      res.status(200).json(userIDs);
-    } catch (error) {
-      res.status(500).json(error);
-    }
-})
+  try {
+    const userIDs = await usersModel.getAllByIds();
+    res.status(200).json(userIDs);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
 module.exports = router;

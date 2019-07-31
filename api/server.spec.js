@@ -27,4 +27,13 @@ describe('server', () => {
           'ten',
         ]));
   });
+
+  describe('findUser', () => {
+    it('responds with 200 OK and a user object', () => {
+      supertest(server)
+        .post('/users/findUser')
+        .send({ auth0_user_id: 'fake |130100' })
+        .expect(200);
+    });
+  });
 });

@@ -82,6 +82,16 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+router.post('/testBody2', async (req, res) => {
+  try {
+    console.log(req, 'AAAA');
+    console.log(req.body, 'BBBBBB');
+    res.status(200).json({ message: req.body });
+  } catch (error) {
+    console.log(error, 'CCCCC');
+  }
+});
+
 router.post('/findUser', async (req, res) => {
   try {
     console.log(req);
@@ -89,6 +99,7 @@ router.post('/findUser', async (req, res) => {
     const regex = /%7C/gi;
     const string = req.body.auth0_user_id;
     console.log(string, 'bbbbbbb');
+
     if (string.match(regex)) {
       console.log(string.replace('%7C', '|'), 'ccccccccccc');
       console.log(string.match(regex), 'ddddddddddddd');
@@ -96,6 +107,7 @@ router.post('/findUser', async (req, res) => {
       req.body.auth0_user_id = a;
       console.log(req.body, 'eeeeeeeeeee');
     }
+
     const users = await usersModel.getUserByUsername(req.body);
     console.log(req.body, 'fffffffffffffffff');
     if (

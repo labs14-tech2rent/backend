@@ -30,6 +30,16 @@ describe('tests for endpoints', () => {
         ]));
   });
 
+ findUser-endpoint
+  describe('findUser', () => {
+    it('responds with 200 OK and a user object', () => {
+      supertest(server)
+        .post('/users/findUser')
+        .send({ auth0_user_id: 'fake |130100' })
+        .expect(200);
+    });
+  });
+
   describe('get all items from db', () => {
     it('responds with the code 200 OK and returns all items from db', () => {
         supertest(itemsRouter)
@@ -55,6 +65,7 @@ describe('tests for endpoints', () => {
           .expect(200);
       });
   });
+
 
 });
 

@@ -10,7 +10,7 @@ const secret = require('../../config/secret');
 router.get(
   '/google',
   passport.authenticate('google', {
-    scope: ['profile', 'email']
+    scope: ['profile', 'email'],
   })
 );
 
@@ -23,12 +23,12 @@ router.post('/register', (req, res) => {
     .addUser(user)
 
     .then(saved => {
-      console.log('saved', saved);
+      // console.log('saved', saved);
       res.status(201).json(saved);
     })
     .catch(error => {
       res.status(500).json(error);
-      console.log(error);
+      //  console.log(error);
     });
 });
 

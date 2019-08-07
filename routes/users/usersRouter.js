@@ -34,7 +34,7 @@ router.post('/:id/items', async (req, res) => {
       const addItem = await db('items')
         .returning('id')
         .insert({ ...newItem, users_ownerId: id });
-      console.log(addItem);
+      // console.log(addItem);
       if (addItem) {
         res.status(201).json(addItem);
       } else {
@@ -49,7 +49,7 @@ router.post('/:id/items', async (req, res) => {
         'There was an error while trying to add an item in the data base',
       err,
     });
-    console.log(err);
+    // console.log(err);
   }
 });
 
@@ -59,11 +59,11 @@ router.get('/:id/reviews', async (req, res) => {
     const { id } = req.params;
     const user = await usersModel.getUserById(id);
     const reviews = await db('users_reviews').where({ user_id: id });
-    console.log('user', user);
+    // console.log('user', user);
 
     res.status(200).json({ ...user, reviews });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(500).json({
       message:
         'There was an error while trying to retrieve a user from the data base',
@@ -78,38 +78,38 @@ router.put('/:id', async (req, res) => {
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ message: 'We ran into an error' });
-    console.log(error);
+    // console.log(error);
   }
 });
 
 router.post('/testBody2', async (req, res) => {
   try {
-    console.log(req, 'AAAA');
-    console.log(req.body, 'BBBBBB');
+    // console.log(req, 'AAAA');
+    // console.log(req.body, 'BBBBBB');
     res.status(200).json({ message: req.body });
   } catch (error) {
-    console.log(error, 'CCCCC');
+    // console.log(error, 'CCCCC');
   }
 });
 
 router.post('/findUser', async (req, res) => {
   try {
-    console.log(req);
-    console.log(req.body, 'aaaaaaaaaaaaa');
+    // console.log(req);
+    // console.log(req.body, 'aaaaaaaaaaaaa');
     const regex = /%7C/gi;
     const string = req.body.auth0_user_id;
-    console.log(string, 'bbbbbbb');
+    // console.log(string, 'bbbbbbb');
 
     if (string.match(regex)) {
-      console.log(string.replace('%7C', '|'), 'ccccccccccc');
-      console.log(string.match(regex), 'ddddddddddddd');
+      // console.log(string.replace('%7C', '|'), 'ccccccccccc');
+      // console.log(string.match(regex), 'ddddddddddddd');
       const a = string.replace('%7C', '|');
       req.body.auth0_user_id = a;
-      console.log(req.body, 'eeeeeeeeeee');
+      // console.log(req.body, 'eeeeeeeeeee');
     }
 
     const users = await usersModel.getUserByUsername(req.body);
-    console.log(req.body, 'fffffffffffffffff');
+    // console.log(req.body, 'fffffffffffffffff');
     if (
       Object.entries(req.body).length === 0 ||
       Object.entries(users).length === 0
@@ -120,7 +120,7 @@ router.post('/findUser', async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ message: 'We ran into an error' });
-    console.log(error, 'ggggggggggggggg');
+    // console.log(error, 'ggggggggggggggg');
   }
 });
 

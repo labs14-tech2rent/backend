@@ -30,6 +30,8 @@ router.post('/:id/items', async (req, res) => {
   try {
     const newItem = req.body;
     const { id } = req.params;
+    console.log(req.body);
+    console.log(newItem);
     if (newItem.name && newItem.description) {
       const addItem = await db('items')
         .returning('id')

@@ -42,4 +42,18 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+router.post('/searchCategory', async (req, res) => {
+  try {
+    console.log(req.body, 'something somethign');
+    const category = req.body;
+    const items = await itemsModel.getItemByCategory(category);
+    console.log(category, 'aaaaaaaaaaaa');
+    console.log(items, 'bbbbbbbbbb');
+    res.status(200).json(items);
+  } catch (error) {
+    res.status(500).json({ message: 'We ran into an error' });
+    console.log(error, 'something');
+  }
+});
+
 module.exports = router;

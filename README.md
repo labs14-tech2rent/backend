@@ -71,7 +71,8 @@ To get the server running locally:
       condition: "Used",
       city: "Philadelphia", 
       state: "PA",
-      zipcode: '19099'
+      zipcode: '19099',
+
   }
 ```
 
@@ -94,6 +95,8 @@ To get the server running locally:
     "state": "IA",
     "zip_code": 62903,
     "average_rating": 5.7,
+          user_bio: 'null',
+      title: 'null',
 
   }
 ```

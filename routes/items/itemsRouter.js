@@ -56,4 +56,40 @@ router.post('/searchCategory', async (req, res) => {
   }
 });
 
+router.post('/searchCondition', async (req, res) => {
+  try {
+    console.log(req.body, 'just testing');
+    const condition = req.body;
+    const items = await itemsModel.getItemByCondition(condition);
+    res.status(200).json(items);
+  } catch (error) {
+    res.status(500).json({ message: 'We ran into an error' });
+    console.log(error, 'something');
+  }
+});
+
+router.post('/searchZipCode', async (req, res) => {
+  try {
+    console.log(req.body, 'just testing');
+    const zipcode = req.body;
+    const items = await itemsModel.getItemByZipCode(zipcode);
+    res.status(200).json(items);
+  } catch (error) {
+    res.status(500).json({ message: 'We ran into an error' });
+    console.log(error, 'something');
+  }
+});
+
+router.post('/searchCity', async (req, res) => {
+  try {
+    console.log(req.body, 'just testing');
+    const location = req.body;
+    const items = await itemsModel.getItemByCity(location);
+    res.status(200).json(items);
+  } catch (error) {
+    res.status(500).json({ message: 'We ran into an error' });
+    console.log(error, 'something');
+  }
+});
+
 module.exports = router;

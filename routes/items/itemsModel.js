@@ -7,6 +7,9 @@ module.exports = {
   updateItem,
   deleteItem,
   getItemByCategory,
+  getItemByCondition,
+  getItemByZipCode,
+  getItemByCity,
 };
 
 function getAll() {
@@ -32,4 +35,16 @@ function deleteItem(id) {
 
 function getItemByCategory(category) {
   return db('items').where(category);
+}
+
+function getItemByCondition(condition) {
+  return db('items').where(condition);
+}
+
+function getItemByZipCode(zipcode) {
+  return db('items').where(zipcode);
+}
+
+function getItemByCity(city) {
+  return db('items').where(city);
 }

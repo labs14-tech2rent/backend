@@ -30,11 +30,13 @@ router.post('/:id/items', async (req, res) => {
   try {
     const newItem = req.body;
     const { id } = req.params;
+    console.log(req.body);
+    console.log(newItem);
     if (newItem.name && newItem.description) {
       const addItem = await db('items')
         .returning('id')
         .insert({ ...newItem, users_ownerId: id });
-      console.log(addItem);
+      // console.log(addItem);
       if (addItem) {
         res.status(201).json(addItem);
       } else {
@@ -74,6 +76,7 @@ router.get('/:id/reviews', async (req, res) => {
 // GET USER BY ID
 router.put('/:id', async (req, res) => {
   try {
+    console.log(req.body);
     const users = await usersModel.update(req.params.id, req.body);
     res.status(200).json(users);
   } catch (error) {

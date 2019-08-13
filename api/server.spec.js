@@ -30,7 +30,6 @@ describe('tests for endpoints', () => {
         ]));
   });
 
-  findUser - endpoint;
   describe('findUser', () => {
     it('responds with 200 OK and a user object', () => {
       supertest(server)
@@ -62,6 +61,42 @@ describe('tests for endpoints', () => {
         .get('/api/users/unprotected')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
+        .expect(200);
+    });
+  });
+
+  describe('searchCategory', () => {
+    it('responds with 200 OK and returns list of users with the specified category', () => {
+      supertest(itemsRouter)
+        .post('/api/items/searchCategory')
+        .send({ category: 'Cameras' })
+        .expect(200);
+    });
+  });
+
+  describe('searchCondition', () => {
+    it('responds with 200 OK and returns a list of users with the specified condition', () => {
+      supertest(itemsRouter)
+        .post('/api/items/searchCondition')
+        .send({ condition: 'Used' })
+        .expect(200);
+    });
+  });
+
+  describe('searchCity', () => {
+    it('responds with 200 OK and returns a list of users with the specified city', () => {
+      supertest(itemsRouter)
+        .post('/api/items/searchCity')
+        .send({ city: 'Philadelphia' })
+        .expect(200);
+    });
+  });
+
+  describe('searchZipCode', () => {
+    it('responds with 200 OK and returns a list of users with the specified zipcode', () => {
+      supertest(itemsRouter)
+        .post('/api/items/searchZipCode')
+        .send({ zipcode: '19099' })
         .expect(200);
     });
   });

@@ -14,6 +14,15 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  try {
+    const singleItem = await itemsModel.getItemById(req.params.id);
+    res.status(200).json(singleItem);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 router.put('/:id', async (req, res) => {
   try {
     const updated = await itemsModel.updateItem(req.params.id, req.body);

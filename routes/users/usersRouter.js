@@ -3,6 +3,7 @@ const knex = require('knex');
 const db = require('../../data/dbConfig');
 const usersModel = require('./usersModel');
 const restricted = require('../auth/authMiddleware');
+const itemsModel = require('../items/itemsModel');
 
 router.get('/', restricted, async (req, res) => {
   try {
@@ -70,6 +71,19 @@ router.get('/:id/reviews', async (req, res) => {
       message:
         'There was an error while trying to retrieve a user from the data base',
     });
+  }
+});
+
+// Get USER, USER REVIEWS, USER ITEMS by ID
+
+router.get('/:id', async (req, res) => {
+  try {
+    const users = await usersModel.getUserById(req.params.id);
+    const usersItems = await itemsModel.getItemsByUsersId(req.params.id);
+    res.status(200).json({ ...users, usersItems });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'We ran into an error' });
   }
 });
 

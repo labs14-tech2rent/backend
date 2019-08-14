@@ -10,6 +10,7 @@ module.exports = {
   getItemByCondition,
   getItemByZipCode,
   getItemByCity,
+  getItemsByUsersId,
 };
 
 function getAll() {
@@ -20,6 +21,10 @@ function getItemById(id) {
   return db('items')
     .where({ id })
     .first();
+}
+
+function getItemsByUsersId(id) {
+  return db('items').where({ users_ownerId: id });
 }
 
 async function updateItem(id, updatedItem) {

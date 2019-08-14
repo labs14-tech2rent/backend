@@ -84,6 +84,15 @@ router.post('/searchCity', async (req, res) => {
   try {
     console.log(req.body, 'just testing');
     const location = req.body;
+    console.log(Object.values(location)[0]);
+    const cityName = Object.values(location)[0];
+    const blah = cityName.substring(0, 1);
+    blah.toUpperCase();
+    console.log(blah.toUpperCase());
+    console.log(typeof blah);
+    // const testString = cityName.slice(1);
+    // console.log(testString);
+
     const items = await itemsModel.getItemByCity(location);
     res.status(200).json(items);
   } catch (error) {

@@ -33,7 +33,10 @@ To get the server running locally:
 | GET    | `/api/items`            | all items      | Returns the list of all items in the db.     |
 | PUT    | `/api/items/:id `       | edit item      | Modify an existing item.                     |
 | DELETE | `/api/items/:id `       | delete item    | Remove item from the db.                     |
-
+| POST   | `/api/items/searchCategory` | filter items| Return items from matching category         |
+| POST   | `/api/items/searchCondition` | filter items| Return items from matching condition         |
+| POST   | `/api/items/searchZipCode` | filter items| Return items from matching zipcode         |
+| POST   | `/api/items/searchCity` | filter items| Return items from matching city         |
 #### User Routes
 
 | Method | Endpoint                | Access Control      | Description                                        |
@@ -126,6 +129,18 @@ To get the server running locally:
 `getAll()` -> Returns all items
 
 `getItemById(itemId)` -> Returns a single item by ID
+
+`updateItem(id, updatedItem)` -> Updates item information by ID
+
+`deleteItem(id)` -> Deletes item by ID
+
+`getItemByCategory(category)` -> Returns items by category
+
+`getItemByCondition(condition)` -> Returns items by condition
+
+`getItemByZipCode(zipcode)` -> Returns items by zipcode
+
+`getItemByCity(city)` -> Returns items by city
 
 <br>
 <br>

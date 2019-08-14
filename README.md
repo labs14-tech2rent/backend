@@ -37,6 +37,7 @@ To get the server running locally:
 | POST   | `/api/items/searchCondition` | filter items| Return items from matching condition         |
 | POST   | `/api/items/searchZipCode` | filter items| Return items from matching zipcode         |
 | POST   | `/api/items/searchCity` | filter items| Return items from matching city         |
+| GET | `/api/items/:id` | all items | Returns specific item by id|
 #### User Routes
 
 | Method | Endpoint                | Access Control      | Description                                        |

@@ -175,9 +175,10 @@ router.post('/findUser', async (req, res) => {
 });
 
 // GET THE LIST OF USER IDS
-router.get('/userIDs', async (req, res) => {
+router.get('/fix/userIDs', async (req, res) => {
   try {
     const userIDs = await usersModel.getAllByIds();
+    console.log(userIDs);
     res.status(200).json(userIDs);
   } catch (error) {
     res.status(500).json(error);

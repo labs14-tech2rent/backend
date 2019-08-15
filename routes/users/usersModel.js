@@ -15,7 +15,9 @@ function getAll() {
 }
 
 function getAllByIds() {
-  return db('users').select('id', 'auth0_user_id');
+  return db('users')
+    .select('auth0_user_id', 'id')
+    .from('users');
 }
 
 function addUser(newUser) {

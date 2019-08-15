@@ -1,7 +1,41 @@
 const router = require('express').Router();
 const knex = require('knex');
+const AWS = require('aws-sdk');
 const itemsModel = require('./itemsModel');
 const restricted = require('../auth/authMiddleware');
+
+
+const { S3_BUCKET_NAME } = process.env;
+const { S3_IAM_USER_KEY } = process.env;
+const { S3_IAM_USER_SECRET } = process.env;
+
+// UPLOAD TO S3 BUCKET
+const uploadToS3 = (file, res) => {
+  const s3Bucket = new AWS.S3({
+    accessKeyId: S3_IAM_USER_KEY,
+    secretAccessKey: S3_IAM_USER_SECRET,
+    Bucket: S3_BUCKET_NAME,
+  });
+  console.log(s3Bucket.Bucket);
+  s3Bucket.createBucket(() => {
+    const params = {
+      Bucket: S3_BUCKET_NAME,
+      Key: file.name,
+      ContentType: file.name.mimetype,
+      Body: file.data,
+    };
+
+    s3Bucket.upload(params, (err, data) => {
+      if (err) {
+        console.log('error in callback');
+        console.log(err);
+      }
+      console.log('success');
+      console.log(data);
+      res.status(200).json(data);
+    });
+  });
+};
 
 // Unprotected routers
 
@@ -110,6 +144,12 @@ router.post('/searchCity', async (req, res) => {
     res.status(500).json({ message: 'We ran into an error' });
     console.log(error, 'something');
   }
+});
+
+router.post('/uploadProfilePicture', async (req, res) => {
+  const file = req.files.name;
+  console.log(file);
+  uploadToS3(file, res);
 });
 
 module.exports = router;

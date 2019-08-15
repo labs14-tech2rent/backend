@@ -15,9 +15,7 @@ function getAll() {
 }
 
 function getAllByIds() {
-  return db('users')
-    .select('auth0_user_id')
-    .select('id');
+  return db('users').select('auth0_user_id', 'id');
 }
 
 function addUser(newUser) {
@@ -43,4 +41,3 @@ function update(id, changes) {
     .update(changes, '*')
     .then(() => getUserById(id1));
 }
-

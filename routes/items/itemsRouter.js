@@ -4,7 +4,6 @@ const AWS = require('aws-sdk');
 const itemsModel = require('./itemsModel');
 const restricted = require('../auth/authMiddleware');
 
-
 const { S3_BUCKET_NAME } = process.env;
 const { S3_IAM_USER_KEY } = process.env;
 const { S3_IAM_USER_SECRET } = process.env;
@@ -20,7 +19,7 @@ const uploadToS3 = (file, res) => {
   s3Bucket.createBucket(() => {
     const params = {
       Bucket: S3_BUCKET_NAME,
-      Key: file.name,
+      Key: file.id,
       ContentType: file.name.mimetype,
       Body: file.data,
     };

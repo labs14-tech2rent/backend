@@ -23,7 +23,7 @@ const uploadToS3 = (file, res) => {
       ContentType: file.name.mimetype,
       Body: file.data,
     };
-    console.log(params);
+    console.log(params, '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
     s3Bucket.upload(params, (err, data) => {
       if (err) {
         console.log('error in callback');
@@ -147,7 +147,8 @@ router.post('/searchCity', async (req, res) => {
 
 router.post('/uploadProfilePicture', async (req, res) => {
   const file = req.files.name;
-  console.log(file);
+  console.log(req.files, '444444444444444');
+  console.log(file, 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
   uploadToS3(file, res);
 });
 

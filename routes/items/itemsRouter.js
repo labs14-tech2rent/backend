@@ -146,7 +146,7 @@ router.post('/searchCity', async (req, res) => {
 });
 
 router.post('/uploadProfilePicture', async (req, res) => {
-  const file = req.files.name;
+  const file = req.files;
   console.log(file);
   uploadToS3(file, res);
 });

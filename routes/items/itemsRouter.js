@@ -19,7 +19,7 @@ const uploadToS3 = (file, res) => {
   s3Bucket.createBucket(() => {
     const params = {
       Bucket: S3_BUCKET_NAME,
-      Key: file.id,
+      Key: file.name,
       ContentType: file.name.mimetype,
       Body: file.data,
     };

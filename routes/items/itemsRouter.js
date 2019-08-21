@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const knex = require('knex');
 const AWS = require('aws-sdk');
+const listAllObjects = require('s3-list-all-objects');
 const itemsModel = require('./itemsModel');
 const restricted = require('../auth/authMiddleware');
 
@@ -36,12 +37,51 @@ const uploadToS3 = (file, res) => {
   });
 };
 
+// List Objects
+
+const s3Test = new AWS.S3({
+  accessKeyId: S3_IAM_USER_KEY,
+  secretAccessKey: S3_IAM_USER_SECRET,
+  // Bucket: S3_BUCKET_NAME,
+});
+
+const params = {
+  Bucket: S3_BUCKET_NAME,
+  MaxKeys: 1000,
+};
 // Unprotected routers
+
+const s3options = {
+  accessKeyId: S3_IAM_USER_KEY,
+  secretAccessKey: S3_IAM_USER_SECRET,
+};
 
 router.get('/', async (req, res) => {
   try {
     const allItems = await itemsModel.getAll();
     res.status(200).json(allItems);
+
+    s3Test.listObjectsV2(params, function(err, data) {
+      if (err) {
+        console.log(err, err.stack);
+      } else {
+        console.log(data);
+      }
+    });
+    /*
+    s3Test.listBuckets(function(err, data) {
+      if (err) {
+        console.log(err, err.stack);
+      } else {
+        console.log(data);
+      }
+    });
+    */
+    /*
+    listAllObjects({ bucket: S3_BUCKET_NAME, s3options }, function(err, data) {
+      console.log(data);
+    });
+    */
   } catch (error) {
     res.status(500).json(error);
   }
@@ -147,7 +187,13 @@ router.post('/searchCity', async (req, res) => {
 
 router.post('/uploadProfilePicture', async (req, res) => {
   const file = req.files.name;
-  console.log(req.files, '444444444444444');
+  const randomNum =
+    Math.floor(Math.random() * 1000000 + 1) -
+    Math.floor(Math.random() * 10000 + 1);
+  file.name = `${randomNum}`;
+  console.log(file.name, '444444444444444');
+  console.log(file.key);
+  // console.log(file1, 'BABABABABAB');
   console.log(file, 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
   uploadToS3(file, res);
 });

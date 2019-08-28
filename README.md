@@ -2,9 +2,9 @@
 
 # API Documentation
 
-#### 1️⃣ Backend delpoyed at [Heroku](https://labstech2rent.herokuapp.com/), STAGING URL: [Heroku Staging](https://labstech2rentstaging.herokuapp.com) <br>
+####  Backend delpoyed to [Heroku](https://labstech2rent.herokuapp.com/), STAGING URL: [Heroku Staging](https://labstech2rentstaging.herokuapp.com) <br>
 
-## 1️⃣ Getting started
+##  Getting started
 
 To get the server running locally:
 

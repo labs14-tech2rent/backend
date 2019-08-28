@@ -37,6 +37,7 @@ To get the server running locally:
 | POST   | `/api/items/searchCondition` | filter items| Return items from matching condition         |
 | POST   | `/api/items/searchZipCode` | filter items| Return items from matching zipcode         |
 | POST   | `/api/items/searchCity` | filter items| Return items from matching city         |
+| GET | `/api/items/:id` | all items | Returns specific item by id|
 #### User Routes
 
 | Method | Endpoint                | Access Control      | Description                                        |
@@ -49,7 +50,7 @@ To get the server running locally:
 | POST   | `/api/auth/register`    | add new user        | Registration of profile of a new user.             |
 | PUT    | `/api/users/:id`        | edit user           | Modify an existing user.                           |
 | POST   | `/api/users/findUser`   | logged in user      | Retrieves user information                         |
-
+| GET | `/api/users/:id` | all users | Retrieves user information with items attached |
 
 # Data Model
 

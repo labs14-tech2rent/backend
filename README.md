@@ -190,4 +190,5 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 ## Documentation
 
 See [Frontend Documentation](https://github.com/labs14-tech2rent/frontend) for details on the frontend of our project.
+
 See [Android Documentation](https://github.com/labs14-tech2rent/android) for details on the Android version of our project.

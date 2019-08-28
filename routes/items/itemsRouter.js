@@ -24,36 +24,38 @@ const uploadToS3 = (file, res) => {
       ContentType: file.name.mimetype,
       Body: file.data,
     };
-    console.log(params, '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
     s3Bucket.upload(params, (err, data) => {
       if (err) {
         console.log('error in callback');
         console.log(err);
       }
       console.log('success');
-      console.log(data);
+      console.log(data, 'BBBBBBBBBBBBBBBB');
       res.status(200).json(data);
     });
   });
 };
 
-// List Objects
+// DELETE FROM S3
 
-const s3Test = new AWS.S3({
-  accessKeyId: S3_IAM_USER_KEY,
-  secretAccessKey: S3_IAM_USER_SECRET,
-  // Bucket: S3_BUCKET_NAME,
-});
-
-const params = {
-  Bucket: S3_BUCKET_NAME,
-  MaxKeys: 1000,
-};
-// Unprotected routers
-
-const s3options = {
-  accessKeyId: S3_IAM_USER_KEY,
-  secretAccessKey: S3_IAM_USER_SECRET,
+const deleteImage = imageName => {
+  const params = {
+    Bucket: S3_BUCKET_NAME,
+    Key: imageName,
+    RequestPayer: requester,
+  };
+  const s3Bucket = new AWS.S3({
+    accessKeyId: S3_IAM_USER_KEY,
+    secretAccessKey: S3_IAM_USER_SECRET,
+    Bucket: S3_BUCKET_NAME,
+  });
+  s3Bucket.deleteObject(params, function(err, data) {
+    if (err) {
+      console.log(err, err.stack);
+    } else {
+      console.log(data);
+    }
+  });
 };
 
 router.get('/', async (req, res) => {
@@ -61,11 +63,22 @@ router.get('/', async (req, res) => {
     const allItems = await itemsModel.getAll();
     res.status(200).json(allItems);
 
-    s3Test.listObjectsV2(params, function(err, data) {
+    const s3Test = new AWS.S3({
+      accessKeyId: S3_IAM_USER_KEY,
+      secretAccessKey: S3_IAM_USER_SECRET,
+      Bucket: S3_BUCKET_NAME,
+    });
+    const params = {
+      // Bucket: S3_BUCKET_NAME,
+      // MaxKeys: 1000,
+    };
+
+    s3Test.listBuckets(params, function(err, data) {
       if (err) {
-        console.log(err, err.stack);
+        console.log(err);
       } else {
         console.log(data);
+        res.status(200).json(data);
       }
     });
     /*
@@ -186,16 +199,27 @@ router.post('/searchCity', async (req, res) => {
 });
 
 router.post('/uploadProfilePicture', async (req, res) => {
-  const file = req.files.name;
-  const randomNum =
-    Math.floor(Math.random() * 1000000 + 1) -
-    Math.floor(Math.random() * 10000 + 1);
-  file.name = `${randomNum}`;
-  console.log(file.name, '444444444444444');
-  console.log(file.key);
-  // console.log(file1, 'BABABABABAB');
-  console.log(file, 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
-  uploadToS3(file, res);
+  try {
+    const file = req.files.name;
+    const randomNum =
+      Math.floor(Math.random() * 1000000 + 1) -
+      Math.floor(Math.random() * 10000 + 1);
+
+    file.name = `${randomNum}`;
+
+    console.log(file.name, '444444444444444');
+    console.log(file.key);
+    // console.log(file1, 'BABABABABAB');
+    uploadToS3(file, res);
+  } catch (error) {
+    res.status(500).json({ message: 'We ran into an error' });
+    console.log(error, 'something');
+  }
+});
+
+router.get(`/deleteImage/:id`, async (req, res) => {
+  const imageName = req.params.id;
+  deleteImage(imageName);
 });
 
 module.exports = router;

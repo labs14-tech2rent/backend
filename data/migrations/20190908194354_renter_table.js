@@ -1,5 +1,5 @@
 exports.up = function(knex) {
-  return knex.schema.table('renter_table', function(tbl) {
+  return knex.schema.createTable('renter_table', function(tbl) {
     tbl.increments();
     tbl
       .integer('item_id', 255)

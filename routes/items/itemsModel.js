@@ -6,6 +6,7 @@ module.exports = {
   getItemById,
   updateItem,
   deleteItem,
+  rentItem,
 };
 
 function getAll() {
@@ -27,4 +28,8 @@ function deleteItem(id) {
   return db('items')
     .where({ id })
     .delete();
+}
+
+function rentItem(body) {
+  return db('renter_table').insert(body);
 }

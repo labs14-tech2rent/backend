@@ -16,6 +16,7 @@ exports.up = function(knex) {
     tbl.date('date_to').notNull();
     tbl.boolean('rent_agree');
     tbl.boolean('returned');
+    tbl.boolean('cancelled');
   });
 };
 

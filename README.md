@@ -32,7 +32,12 @@ To get the server running locally:
 | GET    | `/api/items`            | all items      | Returns the list of all items in the db.     |
 | PUT    | `/api/items/:id `       | edit item      | Modify an existing item.                     |
 | DELETE | `/api/items/:id `       | delete item    | Remove item from the db.                     |
-
+| POST   | `/api/items/searchCategory` | filter items| Return items from matching category         |
+| POST   | `/api/items/searchCondition` | filter items| Return items from matching condition         |
+| POST   | `/api/items/searchZipCode` | filter items| Return items from matching zipcode         |
+| POST   | `/api/items/searchCity` | filter items| Return items from matching city         |
+| GET | `/api/items/:id` | all items | Returns specific item by id|
+| POST | `/api/items/uploadProfilePicture` | all items | Allows uploading of pictures |
 #### User Routes
 
 | Method | Endpoint                | Access Control      | Description                                        |
@@ -45,7 +50,7 @@ To get the server running locally:
 | POST   | `/api/auth/register`    | add new user        | Registration of profile of a new user.             |
 | PUT    | `/api/users/:id`        | edit user           | Modify an existing user.                           |
 | POST   | `/api/users/findUser`   | logged in user      | Retrieves user information                         |
-
+| GET | `/api/users/:id` | all users | Retrieves user information with items attached |
 
 # Data Model
 
@@ -70,7 +75,8 @@ To get the server running locally:
       condition: "Used",
       city: "Philadelphia", 
       state: "PA",
-      zipcode: '19099'
+      zipcode: '19099',
+
   }
 ```
 
@@ -93,6 +99,8 @@ To get the server running locally:
     "state": "IA",
     "zip_code": 62903,
     "average_rating": 5.7,
+          user_bio: 'null',
+      title: 'null',
 
   }
 ```
@@ -122,6 +130,18 @@ To get the server running locally:
 `getAll()` -> Returns all items
 
 `getItemById(itemId)` -> Returns a single item by ID
+
+`updateItem(id, updatedItem)` -> Updates item information by ID
+
+`deleteItem(id)` -> Deletes item by ID
+
+`getItemByCategory(category)` -> Returns items by category
+
+`getItemByCondition(condition)` -> Returns items by condition
+
+`getItemByZipCode(zipcode)` -> Returns items by zipcode
+
+`getItemByCity(city)` -> Returns items by city
 
 <br>
 <br>

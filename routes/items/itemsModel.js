@@ -7,6 +7,11 @@ module.exports = {
   updateItem,
   deleteItem,
   rentItem,
+  getItemByCategory,
+  getItemByCondition,
+  getItemByZipCode,
+  getItemByCity,
+  getItemsByUsersId,
 };
 
 function getAll() {
@@ -17,6 +22,10 @@ function getItemById(id) {
   return db('items')
     .where({ id })
     .first();
+}
+
+function getItemsByUsersId(id) {
+  return db('items').where({ users_ownerId: id });
 }
 
 async function updateItem(id, updatedItem) {
@@ -32,4 +41,20 @@ function deleteItem(id) {
 
 function rentItem(body) {
   return db('renter_table').insert(body);
+}
+
+function getItemByCategory(category) {
+  return db('items').where(category);
+}
+
+function getItemByCondition(condition) {
+  return db('items').where(condition);
+}
+
+function getItemByZipCode(zipcode) {
+  return db('items').where(zipcode);
+}
+
+function getItemByCity(city) {
+  return db('items').where(city);
 }

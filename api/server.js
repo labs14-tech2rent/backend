@@ -5,13 +5,14 @@ const server = express();
 
 const helmet = require('helmet');
 const cors = require('cors');
+const fileupload = require('express-fileupload');
 const passportSetup = require('../config/passport-setup');
 const dataBase = require('../data/dbConfig');
 
 server.use(cors());
 server.use(helmet());
 server.use(express.json());
-
+server.use(fileupload());
 server.use(passport.initialize());
 
 server.get('/', (req, res) => {

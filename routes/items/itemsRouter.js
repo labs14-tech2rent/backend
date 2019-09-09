@@ -124,6 +124,18 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+router.post('/rent', async (req, res) => {
+  try {
+    const body = req.params;
+    const rentRequest = await itemsModel.rentItem(body);
+    res.status(201).json(rentRequest);
+  } catch (err) {
+    res.status(500).json({
+      message: 'There was an error while trying to rent this item',
+    });
+  }
+});
+
 router.post('/searchCategory', async (req, res) => {
   try {
     console.log(req.body, 'something somethign');

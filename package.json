@@ -29,7 +29,7 @@
     "helmet": "^3.18.0",
     "heroku-cli": "^7.0.9",
     "jsonwebtoken": "^8.5.1",
-    "knex": "^0.18.3",
+    "knex": "^0.18.4",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^2.0.0",

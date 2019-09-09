@@ -6,6 +6,7 @@ module.exports = {
   getItemById,
   updateItem,
   deleteItem,
+  rentItem,
   getItemByCategory,
   getItemByCondition,
   getItemByZipCode,
@@ -36,6 +37,10 @@ function deleteItem(id) {
   return db('items')
     .where({ id })
     .delete();
+}
+
+function rentItem(body) {
+  return db('renter_table').insert(body);
 }
 
 function getItemByCategory(category) {

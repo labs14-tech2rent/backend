@@ -2,9 +2,9 @@
 
 # API Documentation
 
-#### 1️⃣ Backend delpoyed at [Heroku](https://labstech2rent.herokuapp.com/), STAGING URL: [Heroku Staging](https://labstech2rentstaging.herokuapp.com) <br>
+####  Backend delpoyed to [Heroku](https://labstech2rent.herokuapp.com/), STAGING URL: [Heroku Staging](https://labstech2rentstaging.herokuapp.com) <br>
 
-## 1️⃣ Getting started
+##  Getting started
 
 To get the server running locally:
 
@@ -15,16 +15,15 @@ To get the server running locally:
 
 ### Backend framework goes here
 
-🚫 Why did you choose this framework?
 
 -    Point One
 -    Point Two
 -    Point Three
 -    Point Four
 
-## 2️⃣ Endpoints
+##  Endpoints
 
-🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
+
 
 #### Items Routes
 
@@ -55,7 +54,7 @@ To get the server running locally:
 
 # Data Model
 
-🚫This is just an example. Replace this with your data model
+
 
 #### ITEMS
 
@@ -122,9 +121,9 @@ To get the server running locally:
       }
 ```
 
-## 2️⃣ Actions
+##  Actions
 
-🚫 This is an example, replace this with the actions that pertain to your backend
+
 
 ### Items
 
@@ -160,7 +159,7 @@ To get the server running locally:
 
 `getUserByUsername(filter)` -> Filters username
 
-## 3️⃣ Environment Variables
+##  Environment Variables
 
 In order for the app to function correctly, the user must set up their own environment variables.
 
@@ -210,5 +209,6 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Frontend Documentation](🚫link to your frontend readme here) for details on the fronend of our project.
-🚫 Add DS iOS and/or Andriod links here if applicable.
+See [Frontend Documentation](https://github.com/labs14-tech2rent/frontend) for details on the frontend of our project.
+
+See [Android Documentation](https://github.com/labs14-tech2rent/android) for details on the Android version of our project.

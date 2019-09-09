@@ -43,4 +43,3 @@ function update(id, changes) {
     .update(changes, '*')
     .then(() => getUserById(id1));
 }
-

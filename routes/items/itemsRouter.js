@@ -34,12 +34,10 @@ router.delete('/:id', async (req, res) => {
     }
   } catch (err) {
     // console.log(err);
-    res
-      .status(500)
-      .json({
-        message:
-          'There was an error while trying to delete an item from the data base',
-      });
+    res.status(500).json({
+      message:
+        'There was an error while trying to delete an item from the data base',
+    });
   }
 });
 

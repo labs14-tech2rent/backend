@@ -26,7 +26,7 @@
     "faker": "^4.1.0",
     "helmet": "^3.18.0",
     "heroku-cli": "^7.0.9",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "knex": "^0.18.3",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^2.0.0",
